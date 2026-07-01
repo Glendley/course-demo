@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Magnum CPA Academy — Course Walkthrough Demo</title>
+<style>
+:root {
+  --nb:  #060E1C;
+  --nb2: #0B1929;
+  --nb3: #0E2036;
+  --nb4: #162B42;
+  --gd:  #E8A430;
+  --gd2: #F3BE68;
+  --gr:  #3A9A4A;
+  --tx:  #ECF3FB;
+  --mu:  #A8C2D8;
+  --br:  rgba(255,255,255,0.09);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--nb);min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 32px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.rec-row{display:flex;align-items:center;justify-content:flex-end;width:100%;max-width:900px;margin-bottom:8px;gap:6px;font-size:.65rem;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.38)}
+.rec-dot{width:7px;height:7px;border-radius:50%;background:#e55;animation:rp 1.4s ease-in-out infinite}
+.rec-dot.off{animation-play-state:paused;opacity:.25}
+@keyframes rp{0%,100%{opacity:1}50%{opacity:.15}}
+.browser{width:100%;max-width:900px;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.06),0 36px 80px rgba(0,0,0,.72)}
+.chrome{background:#1C2028;height:36px;display:flex;align-items:center;padding:0 14px;gap:12px;border-bottom:1px solid rgba(255,255,255,.05)}
+.tls{display:flex;gap:6px}
+.tls span{width:11px;height:11px;border-radius:50%}
+.tr{background:#FF5F57}.ty{background:#FEBC2E}.tg{background:#28C840}
+.addr{flex:1;background:#14181F;border-radius:5px;height:22px;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:rgba(255,255,255,.35);gap:5px}
+.vp{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:none;background:var(--nb2)}
+.vp::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0,transparent 3px,rgba(0,0,0,.035) 3px,rgba(0,0,0,.035) 4px);pointer-events:none;z-index:900}
+.sc{position:absolute;inset:0;opacity:0;transition:opacity .38s;pointer-events:none;overflow:hidden}
+.sc.on{opacity:1}
+
+/* Registration */
+.sr{background:linear-gradient(140deg,rgba(8,18,32,.9),rgba(11,25,41,.75)),linear-gradient(160deg,#0E2036,#0B1929 60%,#071220);display:flex;align-items:center;justify-content:center}
+.sr::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(232,164,48,.055) 1px,transparent 1px);background-size:26px 26px;pointer-events:none}
+.rcard{position:relative;z-index:1;background:rgba(9,19,34,.72);border:1px solid rgba(255,255,255,.12);border-radius:14px;width:min(375px,88%);overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.55)}
+.rhead{background:rgba(5,12,24,.55);padding:22px 22px 18px;text-align:center;border-bottom:3px solid var(--gd)}
+.rtag{font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gd);font-weight:700;margin-bottom:7px}
+.rtitle{font-size:1.05rem;color:var(--tx);font-weight:600;line-height:1.3;margin-bottom:5px}
+.rsub{font-size:.73rem;color:rgba(255,255,255,.62)}
+.rbody{padding:18px 20px 20px}
+.rstep{display:flex;gap:10px;margin-bottom:14px}
+.snum{width:19px;height:19px;border-radius:50%;background:var(--gd);color:#1a1200;display:grid;place-items:center;font-size:.6rem;font-weight:700;flex-shrink:0;margin-top:1px}
+.slbl{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--gd);margin-bottom:3px}
+.sdesc{font-size:.76rem;color:rgba(255,255,255,.7)}
+.flnk{display:inline-block;background:rgba(11,25,41,.85);border:1px solid rgba(232,164,48,.38);color:var(--gd);padding:5px 11px;border-radius:5px;font-size:.7rem;font-weight:600;margin-top:6px;transition:background .15s}
+.flnk.ck{background:rgba(232,164,48,.1)}
+.ni{width:100%;background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.24);padding:6px 0 6px;color:var(--tx);font-size:.88rem;font-family:inherit;margin-top:6px;outline:none}
+.rfoot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.08)}
+.sbtn{background:var(--gd);color:#1a1200;border:none;padding:8px 18px;border-radius:6px;font-size:.8rem;font-weight:700;font-family:inherit;cursor:default;transition:filter .12s}
+.sbtn.pr{filter:brightness(.82)}
+.bnote{font-size:.58rem;color:rgba(255,255,255,.28)}
+
+/* Course */
+.sc2{background:var(--nb2);display:flex;flex-direction:column}
+.ctop{background:var(--nb3);height:32px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;border-bottom:1px solid var(--br);flex-shrink:0}
+.clogo{height:14px;width:85px;background:var(--gd);border-radius:2px;opacity:.85}
+.cuser{font-size:.66rem;color:var(--mu)}
+.cuser strong{color:var(--tx)}
+.cbody{display:flex;flex:1;overflow:hidden}
+.csb{width:188px;background:var(--nb3);border-right:1px solid var(--br);padding:10px 0;flex-shrink:0;display:flex;flex-direction:column}
+.prow{display:flex;align-items:center;gap:9px;padding:0 11px 11px;border-bottom:1px solid var(--br);margin-bottom:5px}
+.prw{position:relative;width:38px;height:38px;flex-shrink:0}
+.prw svg{transform:rotate(-90deg)}
+.rbg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:3}
+.rfill{fill:none;stroke:var(--gd);stroke-width:3;stroke-linecap:round;stroke-dasharray:100.53;stroke-dashoffset:100.53;transition:stroke-dashoffset .6s}
+.rpct{position:absolute;inset:0;display:grid;place-items:center;font-size:.56rem;font-weight:700;color:var(--gd)}
+.plbl b{display:block;font-size:.7rem;color:var(--tx)}
+.plbl span{font-size:.62rem;color:var(--mu)}
+.mb{display:flex;align-items:center;gap:7px;padding:6px 11px;font-size:.72rem;color:var(--mu);transition:background .12s}
+.mb.on{background:rgba(255,255,255,.06);color:var(--tx)}
+.mb.dn{color:#72d48a}
+.pip{width:17px;height:17px;border-radius:50%;background:rgba(255,255,255,.08);display:grid;place-items:center;font-size:.55rem;font-weight:700;color:rgba(255,255,255,.42);flex-shrink:0;transition:background .3s,color .3s}
+.mb.on .pip{background:var(--gd);color:#1a1200}
+.mb.dn .pip{background:var(--gr);color:#fff}
+.qmb{margin-top:auto;padding-top:8px;border-top:1px solid var(--br)}
+.cm{flex:1;padding:18px 22px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--nb4) transparent}
+.mey{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gd);font-weight:700;margin-bottom:4px}
+.mttl{font-family:Georgia,'Times New Roman',serif;font-size:1.28rem;color:var(--tx);font-weight:700;margin-bottom:7px;text-wrap:balance}
+.mint{font-size:.78rem;color:rgba(236,243,251,.8);line-height:1.65;margin-bottom:12px}
+.lc{background:var(--nb4);border:1px solid var(--br);border-radius:7px;padding:11px 13px;margin-bottom:7px}
+.lcl{font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gd);font-weight:700;margin-bottom:4px}
+.lct{font-size:.76rem;color:rgba(236,243,251,.8);line-height:1.58}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:11px}
+.cd{background:rgba(201,67,67,.08);border:1px solid rgba(201,67,67,.26);border-radius:7px;padding:9px 11px}
+.co{background:rgba(58,154,74,.08);border:1px solid rgba(58,154,74,.26);border-radius:7px;padding:9px 11px}
+.cml{font-size:.57rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:4px}
+.cd .cml{color:#f09090}.co .cml{color:#72d48a}
+.cmb{font-size:.72rem;line-height:1.52}
+.cd .cmb{color:rgba(240,200,200,.84)}.co .cmb{color:rgba(180,240,190,.84)}
+.cbtn{background:var(--gd);color:#1a1200;border:none;padding:7px 16px;border-radius:6px;font-size:.76rem;font-weight:700;font-family:inherit;cursor:default;transition:filter .12s}
+.cbtn.pr{filter:brightness(.82)}
+
+/* Quiz */
+.sq{background:var(--nb2);padding:18px 26px 18px;overflow-y:auto}
+.qhd{margin-bottom:12px}
+.qct{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--mu);font-weight:700;margin-bottom:5px}
+.qpt{background:rgba(255,255,255,.1);border-radius:20px;height:3px;margin-bottom:12px}
+.qpf{height:100%;background:var(--gd);border-radius:20px;width:0%;transition:width .4s}
+.qttl{font-family:Georgia,serif;font-size:1.15rem;color:var(--tx);font-weight:700;margin-bottom:3px}
+.qsub{font-size:.74rem;color:var(--mu)}
+.qcd{background:var(--nb4);border:1px solid var(--br);border-radius:8px;padding:13px 15px;margin-bottom:9px}
+.qnum{font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.38);font-weight:700;margin-bottom:5px}
+.qtxt{font-size:.82rem;color:var(--tx);font-weight:600;line-height:1.48;margin-bottom:9px}
+.qop{display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:5px;border:1px solid rgba(255,255,255,.09);margin-bottom:4px;transition:border-color .15s,background .15s}
+.qop.sel{border-color:var(--gd);background:rgba(232,164,48,.08)}
+.qop.ok{border-color:var(--gr);background:rgba(58,154,74,.1)}
+.ol{width:18px;height:18px;border-radius:50%;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:.62rem;font-weight:700;color:rgba(255,255,255,.45);flex-shrink:0;transition:background .15s,color .15s}
+.qop.sel .ol{background:var(--gd);color:#1a1200}
+.qop.ok  .ol{background:var(--gr);color:#fff}
+.otx{font-size:.76rem;color:rgba(236,243,251,.8)}
+.subbtn{background:var(--gd);color:#1a1200;border:none;padding:8px 20px;border-radius:6px;font-size:.82rem;font-weight:700;font-family:inherit;cursor:default;transition:filter .12s}
+.subbtn.pr{filter:brightness(.82)}
+
+/* Certificate */
+.scrt{background:var(--nb2);display:flex;align-items:center;justify-content:center;padding:14px}
+.cppr{background:#fff;border-radius:4px;padding:26px 34px 22px;width:100%;max-width:480px;position:relative;box-shadow:0 18px 50px rgba(0,0,0,.55);text-align:center;color:#202124}
+.cppr::before{content:'';position:absolute;inset:9px;border:1px solid rgba(232,164,48,.42);border-radius:2px;pointer-events:none}
+.cph{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,#c8a96e,#6e4d0e);margin:0 auto 11px;border:2px solid var(--gd)}
+.cpr{font-size:.56rem;letter-spacing:3px;text-transform:uppercase;color:#80868B}
+.cnm{font-family:Georgia,serif;font-size:1.65rem;color:#202124;font-weight:400;border-bottom:1px solid #e0e0e0;padding-bottom:7px;margin:5px 0 7px}
+.ccm{font-size:.72rem;color:#5F6368;margin-bottom:3px}
+.coc{font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gd);font-weight:700;margin:4px 0 5px}
+.cttl{font-family:Georgia,serif;font-size:.95rem;font-weight:700;color:#202124;margin-bottom:9px}
+.cdv{width:40px;height:2px;background:var(--gd);margin:0 auto 9px}
+.cmt{display:flex;justify-content:center;gap:22px;margin-bottom:11px}
+.cmi{text-align:center}
+.cmv{font-size:.8rem;font-weight:700;color:#202124}
+.cmlb{font-size:.54rem;text-transform:uppercase;letter-spacing:.5px;color:#80868B;margin-top:2px}
+.csl{width:100px;height:1px;background:#dadce0;margin:0 auto 5px}
+.csn{font-size:.72rem;font-weight:700;color:#202124}
+.csr{font-size:.6rem;color:#4a4f55;margin-top:1px}
+.cbdg{display:flex;align-items:center;justify-content:center;gap:13px;padding-top:9px;border-top:1px solid #f0f0f0;margin-top:9px}
+.bdp{height:20px;border-radius:3px;opacity:.72;transition:opacity .35s}
+.bdp.lit{opacity:1}
+.cact{display:flex;justify-content:center;margin-top:11px}
+.cpb{background:var(--gd);color:#1a1200;border:none;padding:6px 13px;border-radius:5px;font-size:.7rem;font-weight:700;font-family:inherit;cursor:default}
+
+/* Cursor */
+#cur{position:absolute;width:18px;height:20px;pointer-events:none;z-index:950;transform-origin:0 0;transition:left .55s cubic-bezier(.34,1.05,.64,1),top .55s cubic-bezier(.34,1.05,.64,1);filter:drop-shadow(1px 1.5px 2px rgba(0,0,0,.7))}
+#cur.pr{transition:none;transform:scale(.82)}
+#crng{position:absolute;width:24px;height:24px;border-radius:50%;border:2px solid rgba(232,164,48,.85);pointer-events:none;z-index:940;opacity:0;transform:scale(.3)}
+#crng.f{animation:rf .5s ease-out forwards}
+@keyframes rf{0%{opacity:1;transform:scale(.3)}55%{opacity:.7;transform:scale(1.35)}100%{opacity:0;transform:scale(1.8)}}
+
+/* Caption */
+.cap{background:rgba(4,9,18,.82);width:100%;max-width:900px;min-height:46px;display:flex;align-items:center;justify-content:center;padding:9px 22px;border-radius:0 0 8px 8px;border-top:1px solid rgba(255,255,255,.04)}
+.cpt{font-size:.83rem;color:rgba(255,255,255,.84);line-height:1.5;text-align:center;max-width:660px;min-height:1.2em}
+
+/* Controls */
+.ctl{display:flex;align-items:center;gap:13px;width:100%;max-width:900px;margin-top:13px}
+.pbtn{background:var(--gd);color:#1a1200;border:none;padding:8px 17px;border-radius:6px;font-weight:700;font-family:inherit;font-size:.78rem;cursor:pointer;min-width:80px;transition:background .12s;display:flex;align-items:center;gap:5px}
+.pbtn:hover{background:var(--gd2)}
+.pbtn:focus-visible{outline:2px solid var(--gd);outline-offset:2px}
+.ptr{flex:1;height:4px;background:rgba(255,255,255,.12);border-radius:20px;cursor:pointer}
+.pfill{height:100%;background:var(--gd);border-radius:20px;width:0%;pointer-events:none;transition:width .15s linear}
+.tdisp{font-size:.7rem;color:rgba(255,255,255,.4);font-variant-numeric:tabular-nums;min-width:70px;text-align:right}
+.mbtn{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.75);padding:7px 11px;border-radius:6px;cursor:pointer;font-size:.85rem;line-height:1;transition:background .12s,opacity .12s;flex-shrink:0}
+.mbtn:hover{background:rgba(255,255,255,.15)}
+.mbtn.muted{opacity:.32}
+.vsel{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.6);padding:6px 8px;border-radius:6px;font-size:.68rem;font-family:inherit;cursor:pointer;max-width:160px;outline:none;flex-shrink:0}
+.vsel:focus{border-color:var(--gd)}
+.vsel option{background:#1C2028}
+
+@media(prefers-reduced-motion:reduce){
+  #cur,#crng,.sc,.rfill,.qpf{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<div class="rec-row">
+  <span class="rec-dot off" id="rd"></span>REC
+</div>
+
+<div class="browser">
+  <div class="chrome">
+    <div class="tls"><span class="tr"></span><span class="ty"></span><span class="tg"></span></div>
+    <div class="addr">
+      <svg width="9" height="11" viewBox="0 0 9 11" fill="none"><rect x=".5" y="4.5" width="8" height="6.5" rx="1" fill="rgba(255,255,255,.45)"/><path d="M2 4.5V3a2.5 2.5 0 015 0v1.5" stroke="rgba(255,255,255,.45)" stroke-width="1.2" stroke-linecap="round"/></svg>
+      magnumcpaacademy.com
+    </div>
+  </div>
+
+  <div class="vp" id="vp">
+
+    <!-- Registration -->
+    <div class="sc sr on" id="sReg">
+      <div class="rcard">
+        <div class="rhead">
+          <div class="rtag">Magnum CPA Academy</div>
+          <div class="rtitle">Professional Communication Skills</div>
+          <div class="rsub">Email &amp; Text Messaging for Financial Professionals</div>
+        </div>
+        <div class="rbody">
+          <div class="rstep">
+            <div class="snum">1</div>
+            <div>
+              <div class="slbl">Complete Registration</div>
+              <div class="sdesc">Fill out the enrollment form to officially register.</div>
+              <div class="flnk" id="fBtn">&#9633; Open Registration Form &#x2197;</div>
+            </div>
+          </div>
+          <div class="rstep">
+            <div class="snum">2</div>
+            <div>
+              <div class="slbl">Enter Your Name</div>
+              <div class="sdesc">Your name appears on your certificate.</div>
+              <input class="ni" id="ni" placeholder="First and Last Name" readonly tabindex="-1">
+            </div>
+          </div>
+          <div class="rfoot">
+            <button class="sbtn" id="stBtn" tabindex="-1">Start Course &#8594;</button>
+            <span class="bnote">&#128737; Magnum CPA Academy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course -->
+    <div class="sc sc2" id="sCrs">
+      <div class="ctop">
+        <div class="clogo"></div>
+        <span class="cuser">Welcome, <strong>Glenn Matias</strong></span>
+      </div>
+      <div class="cbody">
+        <div class="csb">
+          <div class="prow">
+            <div class="prw">
+              <svg viewBox="0 0 36 36" width="38" height="38">
+                <circle class="rbg" cx="18" cy="18" r="16"/>
+                <circle class="rfill" id="rf" cx="18" cy="18" r="16"/>
+              </svg>
+              <div class="rpct" id="rp">0%</div>
+            </div>
+            <div class="plbl"><b>Progress</b><span id="pl">0 of 8 done</span></div>
+          </div>
+          <div class="mb on" id="m0"><div class="pip" id="p0">1</div><span>Professional Email</span></div>
+          <div class="mb" id="m1"><div class="pip" id="p1">2</div><span>Professional Text</span></div>
+          <div class="mb" id="m2"><div class="pip" id="p2">3</div><span>Putting Clients on Hold</span></div>
+          <div class="mb" id="m3"><div class="pip" id="p3">4</div><span>Clear Call to Action</span></div>
+          <div class="mb" id="m4"><div class="pip" id="p4">5</div><span>Hold Templates</span></div>
+          <div class="mb" id="m5"><div class="pip" id="p5">6</div><span>Common Mistakes</span></div>
+          <div class="mb" id="m6"><div class="pip" id="p6">7</div><span>Avoid Informal Language</span></div>
+          <div class="mb" id="m7"><div class="pip" id="p7">8</div><span>Key Takeaways</span></div>
+          <div class="mb qmb" id="mQ">
+            <div class="pip" style="background:rgba(232,164,48,.15);color:var(--gd)">&#10022;</div>
+            <span>Knowledge Check</span>
+          </div>
+        </div>
+        <div class="cm">
+          <div class="mey">Module 1 of 8</div>
+          <div class="mttl">Professional Email Replies</div>
+          <div class="mint">Every email from your firm is a reflection of its standards. The difference between a careless reply and a polished one is the difference between a client who trusts you and one who questions you.</div>
+          <div class="lc">
+            <div class="lcl">The 5-Part Email Anatomy</div>
+            <div class="lct">Subject Line &nbsp;&#183;&nbsp; Greeting &nbsp;&#183;&nbsp; Body &nbsp;&#183;&nbsp; Closing &nbsp;&#183;&nbsp; Signature</div>
+          </div>
+          <div class="cg">
+            <div class="cd">
+              <div class="cml">&#215; Unprofessional</div>
+              <div class="cmb">Subject: hey<br><br>Hi,<br>got ur email. not sure about this. ill try to figure it out lol</div>
+            </div>
+            <div class="co">
+              <div class="cml">&#10003; Professional</div>
+              <div class="cmb">Subject: Re: Q3 Tax Review<br><br>Dear Mr. Johnson,<br>Thank you for reaching out. I will review and respond by Thursday at 5 PM.</div>
+            </div>
+          </div>
+          <button class="cbtn" id="cBtn" tabindex="-1">&#10003; Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz -->
+    <div class="sc sq" id="sQz">
+      <div class="qhd">
+        <div class="qct">Knowledge Check &nbsp;&#183;&nbsp; 10 Questions</div>
+        <div class="qpt"><div class="qpf" id="qpf"></div></div>
+        <div class="qttl">Knowledge Check</div>
+        <div class="qsub">Score 90% or higher to earn your certificate of completion.</div>
+      </div>
+      <div class="qcd">
+        <div class="qnum">Question 1 of 10</div>
+        <div class="qtxt">Which part of an email should clearly signal its purpose before the recipient even opens it?</div>
+        <div class="qop" id="o1A"><div class="ol">A</div><span class="otx">The email body</span></div>
+        <div class="qop" id="o1B"><div class="ol">B</div><span class="otx">The subject line</span></div>
+        <div class="qop" id="o1C"><div class="ol">C</div><span class="otx">The signature block</span></div>
+        <div class="qop" id="o1D"><div class="ol">D</div><span class="otx">The greeting</span></div>
+      </div>
+      <div class="qcd">
+        <div class="qnum">Question 2 of 10</div>
+        <div class="qtxt">When a client sends a frustrated message, your first professional response should be to:</div>
+        <div class="qop" id="o2A"><div class="ol">A</div><span class="otx">Defend your position immediately</span></div>
+        <div class="qop" id="o2B"><div class="ol">B</div><span class="otx">Ignore it until you have all the facts</span></div>
+        <div class="qop" id="o2C"><div class="ol">C</div><span class="otx">Acknowledge their frustration and commit to resolution</span></div>
+        <div class="qop" id="o2D"><div class="ol">D</div><span class="otx">Reply with a formal warning</span></div>
+      </div>
+      <button class="subbtn" id="subBtn" tabindex="-1">Submit Answers</button>
+    </div>
+
+    <!-- Certificate -->
+    <div class="sc scrt" id="sCrt">
+      <div class="cppr">
+        <div class="cph"></div>
+        <div class="cpr">This is to certify that</div>
+        <div class="cnm">Glenn Matias</div>
+        <div class="ccm">has successfully completed the course</div>
+        <div class="coc">Certificate of Completion</div>
+        <div class="cttl">Professional Communication Skills</div>
+        <div class="cdv"></div>
+        <div class="cmt">
+          <div class="cmi"><div class="cmv" id="cdt"></div><div class="cmlb">Date Completed</div></div>
+          <div class="cmi"><div class="cmv">8 Modules</div><div class="cmlb">Completed</div></div>
+          <div class="cmi"><div class="cmv">100%</div><div class="cmlb">Quiz Score</div></div>
+        </div>
+        <div class="csl"></div>
+        <div class="csn">Max Drew, CPA</div>
+        <div class="csr">Instructor &middot; Magnum CPA Academy</div>
+        <div class="cbdg">
+          <div class="bdp" id="b1" style="width:48px;background:linear-gradient(135deg,#1a6eb5,#0d4a8b);border-radius:3px"></div>
+          <div class="bdp" id="b2" style="width:58px;background:linear-gradient(135deg,#4285f4,#34a853);border-radius:3px"></div>
+          <div class="bdp" id="b3" style="width:48px;background:linear-gradient(135deg,#c8a350,#7a5a10);border-radius:3px"></div>
+        </div>
+        <div class="cact"><button class="cpb" id="cpb" tabindex="-1">&#128438; Print Certificate</button></div>
+      </div>
+    </div>
+
+    <div id="cur"><svg viewBox="0 0 18 20" width="18" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M2 1L2 17L6.5 13L9.8 19.5L11.8 18.6L8.5 12L13.5 12Z" fill="white" stroke="rgba(0,0,0,.55)" stroke-width=".8" stroke-linejoin="round"/></svg></div>
+    <div id="crng"></div>
+  </div>
+</div>
+
+<div class="cap"><p class="cpt" id="cpt">Click Play to watch the course walkthrough.</p></div>
+
+<div class="ctl">
+  <button class="pbtn" id="pBtn" aria-label="Play">
+    <span id="pIco">&#9654;</span><span id="pLbl">Play</span>
+  </button>
+  <div class="ptr" id="ptr" role="slider" aria-label="Scrub" tabindex="0">
+    <div class="pfill" id="pfill"></div>
+  </div>
+  <span class="tdisp" id="td">0:00 / 0:53</span>
+  <button class="mbtn" id="mBtn" title="Mute / unmute voice">&#128266;</button>
+  <select class="vsel" id="vSel" title="Select voice"></select>
+</div>
+
+<script>
+(function(){
+  const d=new Date();
+  const cdt=document.getElementById('cdt');
+  if(cdt)cdt.textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+
+  var TOTAL=114;
+
+  var S=[
+    {t:0, sc:'sReg',
+     cap:"Welcome to Magnum CPA Academy's Professional Communication Skills course — built specifically for financial professionals.",
+     cx:50, cy:50},
+    {t:7.5, sc:'sReg',
+     cap:"Enrollment is two steps. First, click here to open the official registration form — it opens in a new tab via Google Forms.",
+     gp:function(){return ep('fBtn');}},
+    {t:15, sc:'sReg', cap:"",
+     gp:function(){return ep('fBtn');}, click:1,
+     fx:function(){ g('fBtn').classList.add('ck'); }},
+    {t:16, sc:'sReg',
+     cap:"Step two: enter your full name — this is exactly what will appear on your certificate of completion.",
+     gp:function(){return ep('ni');},
+     fx:function(){ typeInto('ni','Glenn Matias',105); }},
+    {t:22.5, sc:'sReg',
+     cap:"Name entered. Now click Start Course to begin the training.",
+     gp:function(){return ep('stBtn');}},
+    {t:26.5, sc:'sReg', cap:"",
+     gp:function(){return ep('stBtn');}, click:1,
+     fx:function(){ g('stBtn').classList.add('pr'); setTimeout(function(){ g('stBtn').classList.remove('pr'); sw('sCrs'); },180); }},
+    {t:27.5, sc:'sCrs',
+     cap:"Inside the course player. Eight modules are listed in the left sidebar, with a live progress ring that fills as you complete each one.",
+     cx:12, cy:44},
+    {t:36, sc:'sCrs',
+     cap:"Module 1 — Professional Email Replies — opens by default. It starts with the five-part anatomy every professional email needs.",
+     cx:60, cy:32},
+    {t:44, sc:'sCrs',
+     cap:"Side-by-side compare cards show exactly what not to write — and the professional standard right beside it.",
+     cx:60, cy:65},
+    {t:51, sc:'sCrs',
+     cap:"After reviewing the lesson content, click Mark Complete. Progress is tracked and saved automatically.",
+     gp:function(){return ep('cBtn');}},
+    {t:56.5, sc:'sCrs', cap:"",
+     gp:function(){return ep('cBtn');}, click:1,
+     fx:function(){
+       g('cBtn').classList.add('pr');
+       setTimeout(function(){
+         g('cBtn').classList.remove('pr');
+         g('p0').textContent='✓';
+         g('m0').classList.remove('on'); g('m0').classList.add('dn');
+         g('rf').style.strokeDashoffset=(100.53*(1-1/8)).toFixed(2);
+         g('rp').textContent='13%'; g('pl').textContent='1 of 8 done';
+       },200);
+     }},
+    {t:57.5, sc:'sCrs',
+     cap:"After completing all eight modules, the Knowledge Check quiz unlocks right here at the bottom of the sidebar.",
+     gp:function(){return ep('mQ');}},
+    {t:64.5, sc:'sCrs', cap:"",
+     gp:function(){return ep('mQ');}, click:1, fx:function(){ sw('sQz'); }},
+    {t:66, sc:'sQz',
+     cap:"The Knowledge Check: ten questions drawing from all eight modules. Score ninety percent or higher to earn the certificate.",
+     cx:50, cy:28},
+    {t:74, sc:'sQz',
+     cap:"Question 1: which part of an email signals its purpose before it is even opened? The answer is the subject line.",
+     gp:function(){return ep('o1B');}},
+    {t:80.5, sc:'sQz', cap:"",
+     gp:function(){return ep('o1B');}, click:1,
+     fx:function(){ g('o1B').classList.add('sel'); g('qpf').style.width='20%'; }},
+    {t:81.5, sc:'sQz',
+     cap:"Question 2: when a client is frustrated, the professional response is to acknowledge their feelings and commit to resolution.",
+     gp:function(){return ep('o2C');}},
+    {t:88.5, sc:'sQz', cap:"",
+     gp:function(){return ep('o2C');}, click:1,
+     fx:function(){ g('o2C').classList.add('sel'); g('qpf').style.width='40%'; }},
+    {t:89.5, sc:'sQz',
+     cap:"All questions answered. Click Submit — results come back instantly.",
+     gp:function(){return ep('subBtn');}},
+    {t:93.5, sc:'sQz', cap:"",
+     gp:function(){return ep('subBtn');}, click:1,
+     fx:function(){
+       g('subBtn').classList.add('pr');
+       setTimeout(function(){
+         g('subBtn').classList.remove('pr');
+         g('o1B').classList.remove('sel'); g('o1B').classList.add('ok');
+         g('o2C').classList.remove('sel'); g('o2C').classList.add('ok');
+         g('qpf').style.width='100%';
+         setTimeout(function(){ sw('sCrt'); },650);
+       },200);
+     }},
+    {t:95, sc:'sCrt',
+     cap:"Passing the quiz immediately generates a personalized Certificate of Completion — name, completion date, and quiz score all included.",
+     cx:50, cy:42},
+    {t:103, sc:'sCrt',
+     cap:"Issued by Magnum CPA Academy, your certificate confirms you completed all eight modules and passed the final assessment.",
+     cx:50, cy:82,
+     fx:function(){ ['b1','b2','b3'].forEach(function(id,i){ setTimeout(function(){ g(id).classList.add('lit'); },i*160); }); }},
+    {t:111, sc:'sCrt',
+     cap:"Click Print Certificate to save it as a PDF — keep a copy for your records or share it with your team lead.",
+     gp:function(){return ep('cpb');}},
+  ];
+
+  var playing=false, startMs=null, elapsed=0, rafId=null, fired={};
+  var muted=false, voiceList=[], chosenVoice=null, synth=window.speechSynthesis, pendingSpeak=null;
+
+  function g(id){ return document.getElementById(id); }
+  function ep(id){
+    var el=g(id); var vp=g('vp');
+    if(!el||!vp) return {cx:50,cy:50};
+    var er=el.getBoundingClientRect();
+    var vr=vp.getBoundingClientRect();
+    return {
+      cx:(er.left+er.width/2-vr.left)/vr.width*100,
+      cy:(er.top+er.height/2-vr.top)/vr.height*100
+    };
+  }
+  function sw(id){
+    document.querySelectorAll('.sc').forEach(function(s){ s.classList.remove('on'); });
+    var t=g(id); if(t)t.classList.add('on');
+  }
+  function typeInto(id,txt,delay){
+    var el=g(id); if(!el)return; el.value=''; var i=0;
+    var iv=setInterval(function(){ el.value=txt.slice(0,++i); if(i>=txt.length)clearInterval(iv); },delay);
+  }
+  function mc(cx,cy){
+    var vp=g('vp'); var cur=g('cur'); if(!vp||!cur)return;
+    var r=vp.getBoundingClientRect();
+    cur.style.left=(cx/100*r.width)+'px';
+    cur.style.top=(cy/100*r.height)+'px';
+  }
+  function doClick(cx,cy){
+    var vp=g('vp'); var ring=g('crng'); var cur=g('cur'); if(!vp||!ring)return;
+    var r=vp.getBoundingClientRect();
+    var px=cx/100*r.width, py=cy/100*r.height;
+    ring.style.left=(px-12)+'px'; ring.style.top=(py-12)+'px';
+    ring.classList.remove('f'); void ring.offsetWidth; ring.classList.add('f');
+    if(cur){ cur.classList.add('pr'); setTimeout(function(){ cur.classList.remove('pr'); },200); }
+  }
+  function getPos(scene){
+    if(scene.gp){ return scene.gp(); }
+    return {cx:scene.cx||50, cy:scene.cy||50};
+  }
+  function fmt(s){ return Math.floor(s/60)+':'+(('0'+Math.floor(s%60)).slice(-2)); }
+
+  /* ── Voice / speech synthesis ── */
+  function loadVoices(){
+    if(!synth)return;
+    var all=synth.getVoices();
+    if(!all.length)return;
+    var en=all.filter(function(v){ return v.lang.startsWith('en'); });
+    if(!en.length)en=all;
+    voiceList=en;
+    var sel=g('vSel'); sel.innerHTML='';
+    var preferred=['Google US English','Microsoft Jenny','Microsoft Aria','Microsoft David','Microsoft Zira'];
+    en.sort(function(a,b){
+      var ai=preferred.indexOf(a.name), bi=preferred.indexOf(b.name);
+      if(ai===-1)ai=999; if(bi===-1)bi=999; return ai-bi;
+    });
+    en.forEach(function(v,i){
+      var o=document.createElement('option');
+      o.value=i; o.textContent=v.name.replace('Microsoft ','').replace(' Desktop','').replace(' Online (Natural)','');
+      sel.appendChild(o);
+    });
+    chosenVoice=en[0]||null;
+  }
+  function speak(text){
+    if(!synth||!text||muted)return;
+    if(synth.speaking){ pendingSpeak=text; return; }
+    pendingSpeak=null;
+    var u=new SpeechSynthesisUtterance(text);
+    u.rate=0.80; u.pitch=1.0; u.volume=1.0;
+    if(chosenVoice)u.voice=chosenVoice;
+    u.onend=function(){ var nxt=pendingSpeak; if(nxt){ pendingSpeak=null; speak(nxt); } };
+    synth.speak(u);
+  }
+  function stopSpeech(){ pendingSpeak=null; if(synth)synth.cancel(); }
+
+  function applyAt(t){
+    var lastSc=null;
+    for(var i=0;i<S.length;i++){ if(t>=S[i].t&&S[i].sc)lastSc=S[i].sc; }
+    if(lastSc)sw(lastSc);
+    if(t>=16)g('ni').value='Glenn Matias';
+    if(t>=56.5){
+      g('p0').textContent='✓';
+      g('m0').classList.remove('on'); g('m0').classList.add('dn');
+      g('rf').style.strokeDashoffset=(100.53*(1-1/8)).toFixed(2);
+      g('rp').textContent='13%'; g('pl').textContent='1 of 8 done';
+    }
+    if(t>=80.5){ g('o1B').classList.add('sel'); g('qpf').style.width='20%'; }
+    if(t>=88.5){ g('o2C').classList.add('sel'); g('qpf').style.width='40%'; }
+    if(t>=93.5){
+      g('o1B').classList.remove('sel'); g('o1B').classList.add('ok');
+      g('o2C').classList.remove('sel'); g('o2C').classList.add('ok');
+      g('qpf').style.width='100%';
+    }
+    if(t>=103){ ['b1','b2','b3'].forEach(function(id){ g(id).classList.add('lit'); }); }
+    var cur=S[0];
+    for(var i=S.length-1;i>=0;i--){ if(t>=S[i].t){cur=S[i];break;} }
+    if(cur.cap)g('cpt').textContent=cur.cap;
+    var p=getPos(cur); mc(p.cx,p.cy);
+  }
+
+  function reset(){
+    stopSpeech(); fired={}; elapsed=0; startMs=null;
+    g('fBtn').classList.remove('ck');
+    g('ni').value='';
+    g('stBtn').classList.remove('pr');
+    g('cBtn').classList.remove('pr');
+    for(var i=0;i<8;i++){
+      var p=g('p'+i); if(p)p.textContent=i+1;
+      var m=g('m'+i); if(m){ m.classList.remove('dn','on'); if(i===0)m.classList.add('on'); }
+    }
+    g('rf').style.strokeDashoffset='100.53';
+    g('rp').textContent='0%'; g('pl').textContent='0 of 8 done';
+    ['o1A','o1B','o1C','o1D','o2A','o2B','o2C','o2D'].forEach(function(id){ g(id).classList.remove('sel','ok'); });
+    g('qpf').style.width='0%';
+    g('subBtn').classList.remove('pr');
+    ['b1','b2','b3'].forEach(function(id){ g(id).classList.remove('lit'); });
+    sw('sReg'); mc(50,50);
+    g('cpt').textContent='Click Play to watch the course walkthrough.';
+    g('pfill').style.width='0%';
+    g('td').textContent='0:00 / '+fmt(TOTAL);
+  }
+
+  function tick(ts){
+    if(!playing)return;
+    if(!startMs)startMs=ts;
+    elapsed=Math.min((ts-startMs)/1000,TOTAL);
+    g('pfill').style.width=(elapsed/TOTAL*100)+'%';
+    g('td').textContent=fmt(elapsed)+' / '+fmt(TOTAL);
+    var cur=S[0];
+    for(var i=S.length-1;i>=0;i--){ if(elapsed>=S[i].t){cur=S[i];break;} }
+    if(cur){
+      if(cur.cap)g('cpt').textContent=cur.cap;
+      var p=getPos(cur); mc(p.cx,p.cy);
+      var k='k'+cur.t;
+      if(!fired[k+'sc']&&cur.sc){ fired[k+'sc']=1; sw(cur.sc); }
+      if(!fired[k+'cl']&&cur.click){ fired[k+'cl']=1; doClick(p.cx,p.cy); }
+      if(!fired[k+'fx']&&cur.fx){ fired[k+'fx']=1; cur.fx(); }
+      if(!fired[k+'sp']){ fired[k+'sp']=1; if(cur.cap)speak(cur.cap); }
+    }
+    if(elapsed>=TOTAL){
+      playing=false;
+      g('pIco').textContent='↺'; g('pLbl').textContent='Replay';
+      g('rd').classList.add('off'); return;
+    }
+    if(playing)rafId=requestAnimationFrame(tick);
+  }
+
+  g('pBtn').addEventListener('click',function(){
+    if(elapsed>=TOTAL)reset();
+    playing=!playing;
+    if(playing){
+      g('pIco').textContent='⏸'; g('pLbl').textContent='Pause';
+      g('rd').classList.remove('off');
+      if(startMs)startMs=performance.now()-elapsed*1000;
+      rafId=requestAnimationFrame(tick);
+    } else {
+      g('pIco').textContent='▶'; g('pLbl').textContent='Play';
+      g('rd').classList.add('off');
+      cancelAnimationFrame(rafId); stopSpeech();
+    }
+  });
+
+  g('ptr').addEventListener('click',function(e){
+    var r=e.currentTarget.getBoundingClientRect();
+    var pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
+    var t=pct*TOTAL;
+    var wasPlaying=playing;
+    playing=false; cancelAnimationFrame(rafId); stopSpeech();
+    reset(); applyAt(t);
+    elapsed=t; startMs=performance.now()-elapsed*1000;
+    for(var i=0;i<S.length;i++){
+      if(S[i].t>t)break;
+      var k='k'+S[i].t;
+      fired[k+'sc']=1; fired[k+'cl']=1; fired[k+'fx']=1;
+    }
+    g('pfill').style.width=(pct*100)+'%';
+    g('td').textContent=fmt(t)+' / '+fmt(TOTAL);
+    if(wasPlaying){
+      playing=true;
+      g('pIco').textContent='⏸'; g('pLbl').textContent='Pause';
+      g('rd').classList.remove('off');
+      rafId=requestAnimationFrame(tick);
+    }
+  });
+
+  /* ── Mute button ── */
+  g('mBtn').addEventListener('click',function(){
+    muted=!muted;
+    this.textContent=muted?'🔇':'🔊';
+    this.classList.toggle('muted',muted);
+    if(muted)stopSpeech();
+  });
+
+  /* ── Voice selector ── */
+  g('vSel').addEventListener('change',function(){
+    chosenVoice=voiceList[parseInt(this.value)]||null;
+  });
+
+  /* ── Load voices (Chrome loads them async) ── */
+  if(synth){
+    loadVoices();
+    if(synth.onvoiceschanged!==undefined) synth.onvoiceschanged=loadVoices;
+  }
+
+  reset(); mc(50,50);
+})();
+</script>
+</body>
+</html>

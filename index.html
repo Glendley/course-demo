@@ -1,0 +1,1891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Professional Communication Skills — Magnum CPA Academy</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+/* ── Tokens ── */
+:root {
+  --bg:       #0B1929;
+  --sb:       #0E2036;
+  --card:     #162B42;
+  --card-hi:  #1D3554;
+  --gold:     #E8A430;
+  --gold-2:   #F3BE68;
+  --green:    #3A9A4A;
+  --red:      #C94343;
+  --blue-msg: #1D6BD4;
+  --text:     #ECF3FB;
+  --muted:    #A8C2D8;
+  --border:   rgba(255,255,255,0.09);
+  --r:        10px;
+}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--text); line-height:1.65; -webkit-font-smoothing:antialiased; }
+img  { max-width:100%; display:block; }
+a    { color:var(--gold); text-decoration:none; }
+a:hover { text-decoration:underline; }
+
+/* ── REGISTRATION SCREEN ── */
+#regScreen {
+  min-height: 100vh;
+  background: url('../single page magnum/images/hero-bg-2.jpg') center/cover no-repeat;
+  display: flex; align-items: center; justify-content: center;
+  padding: 40px 16px; position: relative;
+}
+#regScreen::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(8,18,32,0.86) 0%, rgba(11,25,41,0.70) 100%);
+}
+
+/* Registration card — frosted glass */
+.reg-card {
+  position: relative; z-index: 1;
+  background: rgba(9,19,34,0.70);
+  backdrop-filter: blur(30px) saturate(1.4);
+  -webkit-backdrop-filter: blur(30px) saturate(1.4);
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.13);
+  width: 100%; max-width: 500px;
+  box-shadow: 0 28px 70px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.10);
+}
+.reg-card-top {
+  background: rgba(5,12,24,0.50);
+  padding: 36px 36px 30px; text-align: center;
+  border-bottom: 4px solid #E8A430;
+}
+.reg-logo-row {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 18px;
+}
+.reg-logo-row img { height: 38px; }
+.reg-academy-tag {
+  font-size: .72rem; letter-spacing: 2px; text-transform: uppercase;
+  color: #E8A430; font-weight: 700;
+}
+.reg-course-title {
+  font-size: 1.55rem; color: #fff; font-weight: 600; line-height: 1.25;
+  margin-bottom: 8px;
+}
+.reg-course-sub { font-size: .93rem; color: rgba(255,255,255,.85); line-height: 1.55; }
+
+.reg-card-body { padding: 30px 36px 32px; }
+
+.reg-step {
+  display: flex; gap: 14px; margin-bottom: 26px;
+}
+.reg-step-num {
+  flex-shrink: 0; width: 27px; height: 27px;
+  background: #E8A430; color: #1a1a1a;
+  border-radius: 50%; font-size: .78rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.reg-step-body { flex: 1; }
+.reg-step-label {
+  font-size: .82rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .9px; color: #E8A430; margin-bottom: 5px;
+}
+.reg-step-desc { font-size: .93rem; color: rgba(255,255,255,.84); margin-bottom: 10px; line-height: 1.6; }
+
+.reg-form-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #0B1929; color: #E8A430; text-decoration: none;
+  padding: 9px 18px; border-radius: 6px; font-size: .87rem; font-weight: 600;
+  transition: background .15s, transform .15s, box-shadow .15s;
+}
+.reg-form-link:hover {
+  background: #162B42; transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.22);
+}
+.reg-form-link i { font-size: .8rem; }
+
+.reg-name-wrap { margin-top: 0; }
+.reg-name-input {
+  width: 100%; border: none; border-bottom: 2px solid rgba(255,255,255,.28);
+  padding: 7px 0 9px; font-size: 1rem; color: #fff;
+  font-family: inherit; outline: none; transition: border-color .18s;
+  background: transparent; box-sizing: border-box;
+}
+.reg-name-input:focus { border-color: #E8A430; }
+.reg-name-input::placeholder { color: rgba(255,255,255,.38); }
+
+.reg-divider {
+  border: none; border-top: 1px solid rgba(255,255,255,.12); margin: 0 0 26px;
+}
+
+.reg-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px;
+}
+.gsubmit {
+  background: #E8A430; color: #1a1a1a; border: none; border-radius: 6px;
+  padding: 11px 28px; font-size: .97rem; font-weight: 700; cursor: pointer;
+  transition: background .15s, box-shadow .15s, transform .15s; font-family: inherit;
+}
+.gsubmit:hover {
+  background: #F3BE68; box-shadow: 0 4px 14px rgba(232,164,48,.4);
+  transform: translateY(-1px);
+}
+.reg-brand { font-size: .75rem; color: rgba(255,255,255,.40); display: flex; align-items: center; gap: 5px; }
+.gerror { display: none; font-size: .78rem; color: #C94343; margin-top: 5px; }
+.gerror.show { display: block; }
+
+/* ── COURSE SCREEN ── */
+#courseScreen { display:none; min-height:100vh; flex-direction:column; }
+
+/* Top bar */
+.course-topbar {
+  background:var(--sb); border-bottom:1px solid var(--border);
+  padding:10px 20px; display:flex; align-items:center; justify-content:space-between;
+  position:sticky; top:0; z-index:100;
+}
+.topbar-brand { display:flex; align-items:center; gap:10px; }
+.topbar-logo {
+  width:160px; height:36px;
+  background:url('../Magnum CPA Website/images/MAGNUM CPA LOGO.png') left center/contain no-repeat;
+}
+.topbar-tag { font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); font-weight:700; background:rgba(232,164,48,.12); border:1px solid rgba(232,164,48,.3); padding:2px 8px; border-radius:20px; }
+.topbar-user { font-size:.88rem; color:var(--muted); }
+.topbar-user b { color:var(--text); }
+
+/* Layout */
+.course-body { display:flex; flex:1; min-height:calc(100vh - 57px); }
+
+/* Sidebar */
+.course-sidebar {
+  width:268px; flex:none; background:var(--sb);
+  border-right:1px solid var(--border);
+  display:flex; flex-direction:column;
+  position:sticky; top:57px; height:calc(100vh - 57px); overflow-y:auto;
+}
+.sidebar-progress-wrap { padding:20px 18px 14px; border-bottom:1px solid var(--border); }
+.progress-ring-wrap { display:flex; align-items:center; gap:14px; }
+.progress-ring { flex:none; }
+.progress-text b { display:block; font-size:.95rem; color:var(--text); font-weight:700; }
+.progress-text span { font-size:.8rem; color:var(--muted); }
+.sidebar-section-label {
+  font-size:.7rem; letter-spacing:1.8px; text-transform:uppercase; color:var(--muted);
+  padding:16px 18px 6px; font-weight:700;
+}
+.mod-btn {
+  display:flex; align-items:center; gap:10px;
+  padding:10px 18px; cursor:pointer; transition:background .15s;
+  border:none; background:transparent; width:100%; text-align:left; color:var(--text);
+  font-family:inherit; font-size:.93rem;
+}
+.mod-btn:hover { background:rgba(255,255,255,.05); }
+.mod-btn.active { background:rgba(232,164,48,.12); border-left:3px solid var(--gold); padding-left:15px; }
+.mod-num {
+  width:26px; height:26px; border-radius:50%; flex:none; display:grid; place-items:center;
+  font-size:.78rem; font-weight:700; background:rgba(255,255,255,.1); color:var(--muted);
+  transition:all .2s;
+}
+.mod-btn.active .mod-num  { background:var(--gold); color:#1a1a1a; }
+.mod-btn.done  .mod-num  { background:var(--green); color:#fff; }
+.mod-btn.done  .mod-num::after { content:'\f00c'; font-family:"Font Awesome 6 Free"; font-weight:900; font-size:.68rem; }
+.mod-btn.done  .mod-num span { display:none; }
+.mod-label { flex:1; line-height:1.3; }
+.mod-label small { display:block; font-size:.76rem; color:var(--muted); margin-top:1px; }
+.mod-btn.quiz-btn { border-top:1px solid var(--border); margin-top:8px; padding-top:14px; }
+.mod-btn.quiz-btn .mod-num { background:rgba(232,164,48,.15); color:var(--gold); }
+
+/* Main Content */
+.course-main { flex:1; padding:36px 40px 60px; overflow-y:auto; }
+.module-pane { display:none; max-width:760px; margin:0 auto; }
+.module-pane.active { display:block; }
+
+/* Module Header */
+.mod-header { margin-bottom:28px; }
+.mod-eyebrow { font-size:.75rem; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:6px; }
+.mod-title { font-family:Georgia,'Times New Roman',serif; font-size:2rem; color:var(--text); font-weight:700; text-wrap:balance; line-height:1.2; margin-bottom:10px; }
+.mod-intro { font-size:1.02rem; color:var(--text); line-height:1.8; max-width:640px; opacity:.88; }
+
+/* Content Blocks */
+.lesson-block { margin-bottom:28px; }
+.block-heading { font-size:1rem; font-weight:700; color:var(--text); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.block-heading i { color:var(--gold); font-size:.9rem; }
+.body-text { font-size:.97rem; color:var(--text); line-height:1.8; margin-bottom:14px; opacity:.9; }
+
+/* Compare Grid */
+.compare-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0; }
+.compare-card { border-radius:var(--r); padding:18px; }
+.compare-card .compare-label { font-size:.75rem; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+.dont-card { background:rgba(201,67,67,.1); border:1px solid rgba(201,67,67,.3); }
+.dont-card .compare-label { color:#f09090; }
+.do-card   { background:rgba(58,154,74,.1); border:1px solid rgba(58,154,74,.3); }
+.do-card   .compare-label { color:#72d48a; }
+.compare-text { font-size:.95rem; line-height:1.75; }
+.dont-card .compare-text { color:#e8baba; }
+.do-card   .compare-text { color:#b8e6c1; }
+
+/* Email Mockup */
+.email-mock {
+  background:#fff; border-radius:10px; overflow:hidden;
+  box-shadow:0 8px 28px rgba(0,0,0,.4); margin:16px 0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+.email-mock-bar {
+  background:#404040; display:flex; align-items:center; gap:6px; padding:8px 12px;
+}
+.email-mock-bar span { width:10px; height:10px; border-radius:50%; display:block; }
+.email-mock-bar .dot-r { background:#ff5f57; }
+.email-mock-bar .dot-y { background:#febc2e; }
+.email-mock-bar .dot-g { background:#28c840; }
+.email-mock-header { background:#f1f3f4; padding:10px 16px; border-bottom:1px solid #e0e0e0; }
+.email-field { display:flex; gap:8px; font-size:.83rem; color:#3C4043; padding:2px 0; }
+.email-field b { color:#202124; min-width:46px; }
+.email-subject { display:flex; gap:8px; font-size:.88rem; font-weight:600; color:#202124; padding:5px 0 0; }
+.email-body { padding:16px; color:#202124; font-size:.93rem; line-height:1.8; white-space:pre-wrap; }
+.email-mock.bad .email-mock-bar { background:#5a2020; }
+.email-mock.bad .email-mock-header { background:#fff0f0; border-bottom-color:#f5c6cb; }
+.email-mock.bad .email-subject { color:#C94343; }
+
+/* SMS Mockup */
+.sms-mock {
+  background:#1c1c1e; border-radius:18px; padding:20px 16px; margin:16px 0;
+  max-width:340px; box-shadow:0 8px 24px rgba(0,0,0,.5);
+}
+.sms-mock .sms-time { font-size:.75rem; color:#8e8e93; text-align:center; margin-bottom:12px; }
+.sms-bubble { max-width:78%; border-radius:16px; padding:9px 14px; font-size:.93rem; line-height:1.55; margin-bottom:8px; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+.sms-bubble.sent { background:var(--blue-msg); color:#fff; margin-left:auto; border-bottom-right-radius:4px; }
+.sms-bubble.recv { background:#2c2c2e; color:#e8e8ed; border-bottom-left-radius:4px; }
+.sms-label { font-size:.75rem; color:#8e8e93; margin-bottom:2px; padding:0 4px; }
+.sms-label.right { text-align:right; }
+
+/* Template Card */
+.template-card {
+  background:var(--card); border:1px solid var(--border); border-left:3px solid var(--gold);
+  border-radius:0 var(--r) var(--r) 0; padding:18px 20px; margin:12px 0; position:relative;
+}
+.template-card .template-label { font-size:.78rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:10px; }
+.template-card .template-body { font-family:'Courier New',Courier,monospace; font-size:.9rem; color:#cfe2f3; line-height:1.85; white-space:pre-wrap; }
+.template-card .copy-btn {
+  position:absolute; top:12px; right:14px; background:rgba(232,164,48,.15);
+  border:1px solid rgba(232,164,48,.3); color:var(--gold); font-size:.78rem; font-weight:600;
+  padding:4px 10px; border-radius:5px; cursor:pointer; transition:all .15s;
+}
+.copy-btn:hover { background:rgba(232,164,48,.28); }
+
+/* Word Swap Table */
+.swap-table { width:100%; border-collapse:collapse; font-size:.95rem; border-radius:var(--r); overflow:hidden; margin:14px 0; }
+.swap-table th { background:var(--card-hi); color:var(--gold); font-size:.76rem; letter-spacing:1.2px; text-transform:uppercase; padding:10px 14px; text-align:left; }
+.swap-table td { padding:10px 14px; border-bottom:1px solid var(--border); }
+.swap-table tr:last-child td { border-bottom:0; }
+.swap-table tr:hover td { background:rgba(255,255,255,.03); }
+.swap-table .col-bad  { color:#f09090; font-family:'Courier New',monospace; }
+.swap-table .col-good { color:#72d48a; font-family:'Courier New',monospace; }
+
+/* Mistake List */
+.mistake-item {
+  background:var(--card); border:1px solid var(--border); border-radius:var(--r);
+  padding:16px 18px; margin-bottom:10px; display:flex; gap:14px; align-items:flex-start;
+}
+.mistake-num { width:30px; height:30px; border-radius:50%; background:rgba(201,67,67,.15); color:#f5a8a8; font-size:.85rem; font-weight:700; display:grid; place-items:center; flex:none; margin-top:1px; }
+.mistake-info h4 { font-size:.97rem; color:var(--text); font-weight:700; margin-bottom:4px; }
+.mistake-info p  { font-size:.9rem; color:var(--text); opacity:.82; line-height:1.65; }
+
+/* Tip Box */
+.tip-box { background:rgba(232,164,48,.08); border:1px solid rgba(232,164,48,.25); border-radius:var(--r); padding:14px 18px; margin:14px 0; display:flex; gap:12px; }
+.tip-box i { color:var(--gold); margin-top:2px; flex:none; }
+.tip-box p { font-size:.95rem; color:var(--text); line-height:1.7; }
+
+/* Takeaway Card */
+.takeaway-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:14px 0; }
+.takeaway-card { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:18px; }
+.takeaway-card .tk-num { font-size:1.5rem; font-weight:800; color:rgba(232,164,48,.3); font-family:Georgia,serif; line-height:1; margin-bottom:8px; }
+.takeaway-card h4 { font-size:.95rem; color:var(--text); font-weight:700; margin-bottom:5px; }
+.takeaway-card p  { font-size:.88rem; color:var(--text); opacity:.82; line-height:1.65; }
+
+/* Module Complete Button */
+.mod-footer { margin-top:36px; padding-top:24px; border-top:1px solid var(--border); display:flex; align-items:center; gap:14px; }
+.btn-complete { background:var(--gold); color:#1a1a1a; border:none; padding:11px 26px; border-radius:8px; font-size:.92rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; display:flex; align-items:center; gap:8px; }
+.btn-complete:hover { background:var(--gold-2); box-shadow:0 6px 18px rgba(232,164,48,.35); }
+.btn-complete:disabled { opacity:.5; cursor:default; box-shadow:none; }
+.btn-back { background:transparent; border:1px solid rgba(255,255,255,.2); color:var(--muted); padding:11px 22px; border-radius:8px; font-size:.88rem; cursor:pointer; font-family:inherit; transition:all .15s; }
+.btn-back:hover { border-color:rgba(255,255,255,.4); color:var(--text); }
+
+/* ── QUIZ ── */
+#quizPane { display:none; max-width:760px; margin:0 auto; }
+#quizPane.active { display:block; }
+.quiz-header { margin-bottom:28px; }
+.quiz-counter { font-size:.8rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); margin-bottom:12px; font-weight:700; }
+.quiz-progress-bar { background:rgba(255,255,255,.1); border-radius:20px; height:5px; margin-bottom:24px; }
+.quiz-progress-fill { height:100%; border-radius:20px; background:var(--gold); transition:width .4s; }
+
+.quiz-q { background:var(--card); border:1px solid var(--border); border-radius:var(--r); padding:22px 24px; margin-bottom:14px; }
+.quiz-q-num { font-size:.76rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); font-weight:700; margin-bottom:8px; }
+.quiz-q-text { font-size:1rem; color:var(--text); font-weight:600; line-height:1.55; margin-bottom:16px; }
+.quiz-opts { display:flex; flex-direction:column; gap:8px; }
+.quiz-opt {
+  display:flex; align-items:flex-start; gap:12px; padding:11px 14px; border-radius:8px;
+  border:1px solid rgba(255,255,255,.12); cursor:pointer; transition:all .15s;
+  background:transparent; text-align:left; font-family:inherit; color:var(--text); font-size:.9rem; width:100%;
+}
+.quiz-opt:hover:not([disabled]) { border-color:var(--gold); background:rgba(232,164,48,.07); }
+.quiz-opt.selected { border-color:var(--gold); background:rgba(232,164,48,.12); }
+.quiz-opt.correct  { border-color:var(--green); background:rgba(58,154,74,.12); color:#72d48a; }
+.quiz-opt.wrong    { border-color:var(--red); background:rgba(201,67,67,.1); color:#f09090; text-decoration:line-through; }
+.quiz-opt.missed   { border-color:var(--green); background:rgba(58,154,74,.07); color:#72d48a; }
+.quiz-opt[disabled] { cursor:default; }
+.opt-letter { width:24px; height:24px; border-radius:50%; background:rgba(255,255,255,.1); display:grid; place-items:center; font-size:.78rem; font-weight:700; flex:none; color:var(--text); }
+.quiz-opt.correct .opt-letter { background:var(--green); color:#fff; }
+.quiz-opt.wrong    .opt-letter { background:var(--red); color:#fff; }
+.quiz-opt.missed   .opt-letter { background:var(--green); color:#fff; }
+.quiz-feedback { font-size:.86rem; margin-top:10px; padding:8px 12px; border-radius:6px; display:none; }
+.quiz-feedback.show { display:block; }
+.quiz-feedback.pass-fb { background:rgba(58,154,74,.12); color:#72d48a; }
+.quiz-feedback.fail-fb { background:rgba(201,67,67,.1); color:#f09090; }
+.quiz-submit-wrap { margin-top:24px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+.btn-submit { background:var(--gold); color:#1a1a1a; border:none; padding:12px 30px; border-radius:8px; font-size:.95rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; }
+.btn-submit:hover { background:var(--gold-2); }
+.btn-submit:disabled { opacity:.5; cursor:default; }
+.btn-retake { background:transparent; border:1px solid rgba(255,255,255,.25); color:var(--text); padding:12px 24px; border-radius:8px; font-size:.9rem; cursor:pointer; font-family:inherit; transition:all .15s; }
+.btn-retake:hover { border-color:var(--gold); color:var(--gold); }
+
+/* Quiz Results */
+.quiz-result { text-align:center; padding:36px 20px 20px; }
+.result-score-ring { width:110px; height:110px; margin:0 auto 18px; }
+.result-heading { font-family:Georgia,serif; font-size:1.7rem; color:var(--text); margin-bottom:8px; }
+.result-sub { color:var(--muted); font-size:.93rem; margin-bottom:24px; }
+.result-pass { color:var(--green); }
+.result-fail { color:var(--red); }
+.btn-cert { background:var(--green); color:#fff; border:none; padding:13px 30px; border-radius:8px; font-size:.97rem; font-weight:700; cursor:pointer; font-family:inherit; transition:all .15s; display:inline-flex; align-items:center; gap:8px; }
+.btn-cert:hover { filter:brightness(1.1); box-shadow:0 8px 20px rgba(58,154,74,.4); }
+
+/* ── CERTIFICATE ── */
+#certScreen {
+  display:none; min-height:100vh; background:var(--bg); align-items:center;
+  justify-content:center; padding:40px 16px;
+}
+.cert-wrap {
+  background:#fff; max-width:760px; width:100%; border-radius:4px;
+  padding:56px 64px; position:relative; overflow:hidden;
+  box-shadow:0 30px 70px rgba(0,0,0,.6);
+}
+.cert-wrap::before, .cert-wrap::after {
+  content:""; position:absolute; inset:14px; border:1px solid rgba(232,164,48,.5);
+  pointer-events:none; border-radius:2px;
+}
+.cert-wrap::after { inset:18px; border-color:rgba(232,164,48,.2); }
+.cert-corner { position:absolute; width:50px; height:50px; }
+.cert-corner::before, .cert-corner::after { content:""; position:absolute; background:var(--gold); }
+.cert-corner::before { width:3px; height:30px; }
+.cert-corner::after  { width:30px; height:3px; }
+.cert-corner.tl { top:12px; left:12px; }
+.cert-corner.tl::before { top:0; left:0; }
+.cert-corner.tl::after  { top:0; left:0; }
+.cert-corner.tr { top:12px; right:12px; }
+.cert-corner.tr::before { top:0; right:0; }
+.cert-corner.tr::after  { top:0; right:0; }
+.cert-corner.bl { bottom:12px; left:12px; }
+.cert-corner.bl::before { bottom:0; left:0; }
+.cert-corner.bl::after  { bottom:0; left:0; }
+.cert-corner.br { bottom:12px; right:12px; }
+.cert-corner.br::before { bottom:0; right:0; }
+.cert-corner.br::after  { bottom:0; right:0; }
+.cert-content { text-align:center; position:relative; z-index:2; }
+.cert-logo-wrap {
+  width:110px; height:110px; border-radius:50%; overflow:hidden;
+  margin:0 auto 22px; border:3px solid #E8A430;
+  box-shadow:0 4px 18px rgba(0,0,0,.15);
+}
+.cert-logo-wrap img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+.cert-presents { font-size:.72rem; letter-spacing:3px; text-transform:uppercase; color:#80868B; }
+.cert-of-completion { font-size:.88rem; letter-spacing:2px; text-transform:uppercase; color:#E8A430; font-weight:700; margin:6px 0 16px; }
+.cert-name { font-family:Georgia,'Times New Roman',serif; font-size:2.4rem; color:#202124; font-weight:400; border-bottom:1px solid #dadce0; padding-bottom:10px; margin-bottom:16px; }
+.cert-has-completed { font-size:.88rem; color:#5F6368; margin-bottom:6px; }
+.cert-course { font-family:Georgia,serif; font-size:1.35rem; color:#202124; font-weight:700; margin-bottom:20px; }
+.cert-divider { width:60px; height:2px; background:var(--gold); margin:0 auto 20px; }
+.cert-meta { display:flex; justify-content:center; gap:40px; margin-bottom:28px; }
+.cert-meta-item { text-align:center; }
+.cert-meta-item .val { font-weight:700; color:#202124; font-size:.95rem; }
+.cert-meta-item .lbl { font-size:.72rem; color:#80868B; letter-spacing:.5px; text-transform:uppercase; margin-top:2px; }
+.cert-sig { display:flex; justify-content:center; gap:60px; margin-top:8px; }
+.cert-sig-item { text-align:center; }
+.cert-sig-item .sig-line { width:120px; height:1px; background:#dadce0; margin:0 auto 5px; }
+/* Match actual HTML class names */
+.cert-sig-name { font-size:.88rem; font-weight:700; color:#202124 !important; }
+.cert-sig-role { font-size:.76rem; color:#4a4f55 !important; margin-top:2px; }
+.cert-trust-badges {
+  display:flex; align-items:center; justify-content:center;
+  gap:28px; margin-top:22px; padding-top:18px;
+  border-top:1px solid #e8e8e8;
+}
+.cert-trust-badges img { height:90px; width:auto; object-fit:contain; opacity:.9; }
+.cert-actions { display:flex; gap:12px; justify-content:center; margin-top:28px; }
+.btn-print { background:var(--gold); color:#1a1a1a; border:none; padding:10px 24px; border-radius:6px; font-weight:700; cursor:pointer; font-family:inherit; font-size:.9rem; display:inline-flex; align-items:center; gap:6px; }
+.btn-back-course { background:transparent; border:1px solid #dadce0; color:#5F6368; padding:10px 22px; border-radius:6px; cursor:pointer; font-family:inherit; font-size:.9rem; }
+.btn-back-course:hover { background:#f8f9fa; }
+
+/* ═══════════════════════════════════════════
+   INTERACTIVE ENHANCEMENTS
+═══════════════════════════════════════════ */
+
+/* ── Keyframes ── */
+@keyframes modEnter {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes rippleOut {
+  to { transform: scale(3.8); opacity: 0; }
+}
+@keyframes completeBounce {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.45); }
+  65%  { transform: scale(0.88); }
+  100% { transform: scale(1); }
+}
+@keyframes btnGlow {
+  0%,100% { box-shadow: 0 6px 20px rgba(232,164,48,.38); }
+  50%      { box-shadow: 0 6px 32px rgba(232,164,48,.72); }
+}
+@keyframes resultIn {
+  0%   { opacity: 0; transform: scale(0.86) translateY(20px); }
+  60%  { transform: scale(1.03) translateY(-4px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── Module / quiz pane entrance ── */
+.module-pane.active, #quizPane.active {
+  animation: modEnter 0.32s cubic-bezier(0.22, 0.8, 0.42, 1);
+}
+.module-pane.active .mod-header {
+  animation: cardIn 0.28s ease both;
+}
+.module-pane.active .lesson-block {
+  opacity: 0;
+  animation: cardIn 0.36s ease forwards;
+  animation-delay: 0.05s;
+}
+.module-pane.active .lesson-block:nth-child(3)  { animation-delay: .11s; }
+.module-pane.active .lesson-block:nth-child(4)  { animation-delay: .17s; }
+.module-pane.active .lesson-block:nth-child(5)  { animation-delay: .23s; }
+.module-pane.active .lesson-block:nth-child(6)  { animation-delay: .29s; }
+
+/* ── Tilt-element shimmer highlight ── */
+.tilt-el { position: relative; }
+.tilt-el::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(
+    circle 110px at var(--tx, 50%) var(--ty, 50%),
+    rgba(255,255,255,.065) 0%,
+    transparent 72%
+  );
+  opacity: 0; transition: opacity 0.22s; border-radius: inherit; z-index: 1;
+}
+.tilt-el:hover::after { opacity: 1; }
+
+/* ── Card hover states ── */
+.takeaway-card {
+  transition: transform 0.18s ease, box-shadow 0.18s, border-color 0.18s;
+}
+.takeaway-card:hover {
+  border-color: rgba(232,164,48,.32);
+  box-shadow: 0 16px 38px rgba(0,0,0,.45), 0 0 0 1px rgba(232,164,48,.18);
+}
+.compare-card  { transition: transform 0.18s ease, box-shadow 0.18s; }
+.dont-card:hover { box-shadow: 0 14px 32px rgba(201,67,67,.28); }
+.do-card:hover   { box-shadow: 0 14px 32px rgba(58,154,74,.28); }
+
+/* ── Email & SMS hover lift ── */
+.email-mock {
+  transition: transform 0.26s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.26s ease;
+}
+.email-mock:hover {
+  transform: translateY(-6px) scale(1.014) !important;
+  box-shadow: 0 24px 56px rgba(0,0,0,.6);
+}
+.sms-mock {
+  transition: transform 0.26s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.26s ease;
+}
+.sms-mock:hover {
+  transform: translateY(-6px) !important;
+  box-shadow: 0 20px 46px rgba(0,0,0,.65);
+}
+
+/* ── Mistake items slide ── */
+.mistake-item {
+  transition: transform 0.18s ease, background 0.18s, border-color 0.18s, box-shadow 0.18s;
+  cursor: default;
+}
+.mistake-item:hover {
+  transform: translateX(8px);
+  background: rgba(255,255,255,.055);
+  border-color: rgba(255,255,255,.14);
+  box-shadow: -3px 0 0 0 var(--gold);
+}
+
+/* ── Template card hover ── */
+.template-card {
+  transition: transform 0.18s ease, box-shadow 0.18s, border-left-color 0.18s;
+}
+.template-card:hover {
+  transform: translateY(-4px) translateX(3px);
+  box-shadow: 0 16px 38px rgba(0,0,0,.44);
+  border-left-color: var(--gold-2);
+}
+
+/* ── Tip box hover ── */
+.tip-box { transition: transform 0.18s ease, background 0.18s; cursor: default; }
+.tip-box:hover { transform: translateX(7px); background: rgba(232,164,48,.14); }
+
+/* ── Word-swap table row hover ── */
+.swap-table tbody tr { transition: background 0.15s, transform 0.15s; }
+.swap-table tbody tr:hover { transform: translateX(5px); }
+
+/* ── Sidebar shimmer sweep ── */
+.mod-btn { position: relative; overflow: hidden; }
+.mod-btn::before {
+  content: ''; position: absolute; top: 0; bottom: 0;
+  left: -80px; width: 60px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+  transition: left 0.55s ease; pointer-events: none;
+}
+.mod-btn:hover::before { left: 140%; }
+
+/* ── Quiz option slide ── */
+.quiz-opt:not([disabled]) {
+  transition: transform 0.15s ease, border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+.quiz-opt:not([disabled]):hover {
+  transform: translateX(7px);
+  box-shadow: -3px 0 0 0 var(--gold);
+}
+
+/* ── Button hover glow ── */
+.btn-complete:not(:disabled):hover { animation: btnGlow 1.4s infinite; }
+
+/* ── Completion number bounce ── */
+.mod-num.bounce { animation: completeBounce 0.5s cubic-bezier(0.34,1.56,0.64,1); }
+
+/* ── Google form card lift ── */
+.gform-card { transition: transform 0.18s ease, box-shadow 0.18s; }
+.gform-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,.14); }
+
+/* ── Quiz result bounce in ── */
+#quizResultBox > div {
+  animation: resultIn 0.52s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+/* Reduced motion: skip all */
+@media (prefers-reduced-motion: reduce) {
+  .module-pane.active, #quizPane.active,
+  .module-pane.active .mod-header,
+  .module-pane.active .lesson-block,
+  #quizResultBox > div { animation: none !important; opacity: 1; transform: none; }
+}
+
+/* ── Responsive ── */
+@media (max-width:900px) {
+  .course-sidebar { display:none; }
+  .course-main { padding:24px 18px 50px; }
+  .compare-grid, .takeaway-grid { grid-template-columns:1fr; }
+  .cert-wrap { padding:36px 28px; }
+  .cert-name { font-size:1.8rem; }
+}
+@media (max-width:560px) {
+  .gform-header, .gform-card { padding:20px 18px; }
+  .mod-title { font-size:1.55rem; }
+  .swap-table { display:block; overflow-x:auto; }
+}
+
+/* Print */
+@media print {
+  #courseScreen, #regScreen { display:none !important; }
+  #certScreen { display:flex !important; background:#fff !important; }
+  .cert-actions { display:none !important; }
+  .cert-wrap { box-shadow:none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     REGISTRATION SCREEN
+══════════════════════════════════════════ -->
+<div id="regScreen">
+  <div class="reg-card">
+
+    <div class="reg-card-top">
+      <div class="reg-logo-row">
+        <img src="../Magnum CPA Website/images/logo.png" alt="Magnum CPA" onerror="this.style.display='none'">
+        <span class="reg-academy-tag">Magnum CPA Academy</span>
+      </div>
+      <div class="reg-course-title">Professional Communication Skills</div>
+      <div class="reg-course-sub">Email &amp; Text Messaging for Financial Professionals</div>
+    </div>
+
+    <div class="reg-card-body">
+
+      <div class="reg-step">
+        <div class="reg-step-num">1</div>
+        <div class="reg-step-body">
+          <div class="reg-step-label">Complete Registration</div>
+          <div class="reg-step-desc">Fill out the enrollment form to officially register for this course.</div>
+          <a class="reg-form-link"
+             href="https://docs.google.com/forms/d/e/1FAIpQLSe0EXnni2AdCQY3_cP8YbMsjhYMOQz4QvxF3VitKNEqw9MOjQ/viewform?usp=header"
+             target="_blank" rel="noopener">
+            <i class="fa fa-wpforms"></i> Open Registration Form
+            <i class="fa fa-external-link-alt"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="reg-step">
+        <div class="reg-step-num">2</div>
+        <div class="reg-step-body">
+          <div class="reg-step-label">Enter Your Name</div>
+          <div class="reg-step-desc">Your name will appear on your certificate of completion.</div>
+          <div class="reg-name-wrap">
+            <input class="reg-name-input" type="text" id="regName"
+                   placeholder="First and Last Name" autocomplete="name">
+            <div class="gerror" id="errName">Please enter your full name.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="reg-divider">
+
+      <div class="reg-footer">
+        <button class="gsubmit" onclick="submitRegistration()">
+          Start Course &nbsp;→
+        </button>
+        <span class="reg-brand">
+          <i class="fa fa-shield-alt"></i> Magnum CPA Academy
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     COURSE SCREEN
+══════════════════════════════════════════ -->
+<div id="courseScreen">
+
+  <!-- Top Bar -->
+  <div class="course-topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo"></div>
+      <span class="topbar-tag">Academy</span>
+    </div>
+    <div class="topbar-user">Enrolled: <b id="topbarName"></b></div>
+  </div>
+
+  <div class="course-body">
+
+    <!-- Sidebar -->
+    <aside class="course-sidebar">
+      <div class="sidebar-progress-wrap">
+        <div class="progress-ring-wrap">
+          <svg class="progress-ring" width="54" height="54" viewBox="0 0 54 54">
+            <circle cx="27" cy="27" r="22" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="4"/>
+            <circle id="progressRingFill" cx="27" cy="27" r="22" fill="none" stroke="#E8A430" stroke-width="4"
+              stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="138.2"
+              transform="rotate(-90 27 27)" style="transition:stroke-dashoffset .5s"/>
+          </svg>
+          <div class="progress-text">
+            <b id="progressLabel">0 / 8</b>
+            <span>modules complete</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section-label">Course Modules</div>
+
+      <button class="mod-btn active" id="sb-0" onclick="goModule(0)">
+        <div class="mod-num"><span>1</span></div>
+        <div class="mod-label">Professional Email Replies<small>Structure · Tone · Timing</small></div>
+      </button>
+      <button class="mod-btn" id="sb-1" onclick="goModule(1)">
+        <div class="mod-num"><span>2</span></div>
+        <div class="mod-label">Professional Text Replies<small>Brief but professional</small></div>
+      </button>
+      <button class="mod-btn" id="sb-2" onclick="goModule(2)">
+        <div class="mod-num"><span>3</span></div>
+        <div class="mod-label">Putting Clients on Hold<small>Acknowledge · Explain · Commit</small></div>
+      </button>
+      <button class="mod-btn" id="sb-3" onclick="goModule(3)">
+        <div class="mod-num"><span>4</span></div>
+        <div class="mod-label">Clear Call to Action<small>Tell them exactly what's next</small></div>
+      </button>
+      <button class="mod-btn" id="sb-4" onclick="goModule(4)">
+        <div class="mod-num"><span>5</span></div>
+        <div class="mod-label">Hold Message Templates<small>Ready-to-use scripts</small></div>
+      </button>
+      <button class="mod-btn" id="sb-5" onclick="goModule(5)">
+        <div class="mod-num"><span>6</span></div>
+        <div class="mod-label">Common Mistakes<small>What not to do</small></div>
+      </button>
+      <button class="mod-btn" id="sb-6" onclick="goModule(6)">
+        <div class="mod-num"><span>7</span></div>
+        <div class="mod-label">Avoid Informal Language<small>Word swaps that matter</small></div>
+      </button>
+      <button class="mod-btn" id="sb-7" onclick="goModule(7)">
+        <div class="mod-num"><span>8</span></div>
+        <div class="mod-label">Key Takeaways<small>Your quick-reference guide</small></div>
+      </button>
+
+      <div class="sidebar-section-label">Assessment</div>
+      <button class="mod-btn quiz-btn" id="sb-quiz" onclick="goQuiz()">
+        <div class="mod-num" style="background:rgba(232,164,48,.15);color:var(--gold)"><i class="fa fa-clipboard-check"></i></div>
+        <div class="mod-label">Final Quiz<small>10 questions · 90% to pass</small></div>
+      </button>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="course-main">
+
+      <!-- ── MODULE 1: Professional Email Replies ── -->
+      <div class="module-pane active" id="mod-0">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 1 of 8</div>
+          <h1 class="mod-title">Professional Email Replies</h1>
+          <p class="mod-intro">How you respond to emails shapes the impression every client and colleague holds of you. A well-crafted reply signals competence, reliability, and respect — before you've even spoken a word.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-envelope-open-text"></i> Anatomy of a Professional Email</div>
+          <p class="body-text">Every professional reply should include five clear components. Missing any one of them creates friction and erodes trust.</p>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:14px 0">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;border-top:3px solid var(--gold)">
+              <div style="font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px">01 · Subject Line</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">Specific and descriptive. Never blank or just "Hi."</p>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;border-top:3px solid var(--gold)">
+              <div style="font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px">02 · Greeting</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">Use the person's name. Formal or first name based on relationship.</p>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;border-top:3px solid var(--gold)">
+              <div style="font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px">03 · Body</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">Context → answer → next step. One topic per email.</p>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;border-top:3px solid var(--gold)">
+              <div style="font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px">04 · Closing</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">"Best regards," "Sincerely," or "Thank you," — always.</p>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px;border-top:3px solid var(--gold)">
+              <div style="font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:5px">05 · Signature</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">Name, title, company, and contact number.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-clock"></i> Response Time Standards</div>
+          <p class="body-text">Response time is itself a professional statement. Clients interpret silence as disorganization or disinterest.</p>
+          <div class="tip-box"><i class="fa fa-lightbulb"></i><p><strong>The 24-hour rule:</strong> Acknowledge all client emails within one business day — even if only to say you received it and will respond fully by a specific date. Never let a client email sit unanswered for more than 48 hours.</p></div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-balance-scale"></i> Bad vs. Good — See the Difference</div>
+          <p class="body-text">The same information, delivered two different ways. One builds confidence; the other destroys it.</p>
+
+          <div class="email-mock bad">
+            <div class="email-mock-bar"><span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span></div>
+            <div class="email-mock-header">
+              <div class="email-field"><b>From:</b> sarah@company.com</div>
+              <div class="email-field"><b>To:</b> client@email.com</div>
+              <div class="email-subject" style="color:#C94343"><i class="fa fa-times-circle" style="font-size:.8rem;margin-right:4px"></i> Re: your question</div>
+            </div>
+            <div class="email-body" style="color:#5F6368">hey,
+
+got ur email. ill look into it and get back to u when i can. pretty busy rn but will try to get to it soon.
+
+sarah</div>
+          </div>
+
+          <div class="email-mock" style="margin-top:10px">
+            <div class="email-mock-bar"></div>
+            <div class="email-mock-header">
+              <div class="email-field"><b>From:</b> sarah@company.com</div>
+              <div class="email-field"><b>To:</b> client@email.com</div>
+              <div class="email-subject" style="color:#0F9D58"><i class="fa fa-check-circle" style="font-size:.8rem;margin-right:4px"></i> Re: Question Regarding Q3 Account Summary</div>
+            </div>
+            <div class="email-body">Dear Mr. Johnson,
+
+Thank you for reaching out regarding your Q3 account summary. I have received your message and am reviewing the details.
+
+I will provide a full response with the information you requested by Thursday, June 19, at 5:00 PM EST.
+
+If this is time-sensitive, please do not hesitate to call me directly at (555) 123-4567.
+
+Best regards,
+Sarah Mitchell
+Account Manager · Magnum CPA PC
+(555) 123-4567</div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-envelope-open-text"></i> Email Best Practices</div>
+          <p class="body-text">Strong email habits build trust over time. These five principles separate professionals from everyone else in a client's inbox.</p>
+          <div style="display:flex;flex-direction:column;gap:10px;margin:14px 0">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">1</div>
+              <div><strong style="color:var(--text)">The Golden Rule of Subject Lines</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Make them specific and actionable. Instead of "Question," write "Question regarding Q3 Marketing Budget (Due Friday)."</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">2</div>
+              <div><strong style="color:var(--text)">The Sandwich Method</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Start with a polite greeting, state your purpose clearly in the middle, and end with a clear call to action or next step.</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">3</div>
+              <div><strong style="color:var(--text)">Keep It Scannable</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">No one wants to read a wall of text. Use bullet points and short paragraphs (2–3 sentences max) to break up information.</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">4</div>
+              <div><strong style="color:var(--text)">Proofread Twice</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Double-check the recipient's name spelling, confirm any attachments are actually attached, and re-read once to check the tone.</span></div>
+            </div>
+          </div>
+          <div class="tip-box"><i class="fa fa-gavel"></i><p>The "Front Page" Test: Never write anything in an email you wouldn't want your boss, a client, or a judge reading. Assume every email is permanent.</p></div>
+        </div>
+
+        <div class="mod-footer">
+          <button class="btn-complete" onclick="completeModule(0)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 2: Professional Text Replies ── -->
+      <div class="module-pane" id="mod-1">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 2 of 8</div>
+          <h1 class="mod-title">Professional Text Replies</h1>
+          <p class="mod-intro">Text messaging is fast — but fast can easily read as careless. The goal is brevity without sacrificing the professionalism your clients expect.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-mobile-alt"></i> When Is Texting Appropriate?</div>
+          <p class="body-text">Texting is appropriate for quick confirmations, scheduling reminders, and follow-ups with established clients who have consented to text communication. It is <em>not</em> appropriate for sensitive financial information, complaints, or anything requiring documentation.</p>
+          <div class="tip-box"><i class="fa fa-exclamation-triangle"></i><p>Never send account numbers, tax details, SSNs, or confidential financial data via text message. Use encrypted email for all sensitive information.</p></div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-comment-alt"></i> The 3 Rules of Professional Texting</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin:12px 0">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:12px">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.8rem;font-weight:700;flex:none">1</div>
+              <div><strong style="color:var(--text)">Write complete sentences.</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Even brief messages should read as full thoughts. "K" and "👍" are never acceptable professional responses.</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:12px">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.8rem;font-weight:700;flex:none">2</div>
+              <div><strong style="color:var(--text)">No slang, abbreviations, or emojis.</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Unless you have a clearly informal working relationship — and even then, keep it tasteful.</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:12px">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.8rem;font-weight:700;flex:none">3</div>
+              <div><strong style="color:var(--text)">Acknowledge, even if you can't answer fully.</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">A quick "Received — I'll follow up by 3 PM" is far better than leaving a client wondering.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-mobile-alt"></i> Bad vs. Good — Text Examples</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div>
+              <div style="font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:#f09090;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px"><i class="fa fa-times-circle"></i> Unprofessional</div>
+              <div class="sms-mock">
+                <div class="sms-time">Today 2:14 PM</div>
+                <div class="sms-label">Client</div>
+                <div class="sms-bubble recv">Can we reschedule our Friday meeting?</div>
+                <div class="sms-label right">You</div>
+                <div class="sms-bubble sent">k sure whatevr works</div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:#72d48a;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px"><i class="fa fa-check-circle"></i> Professional</div>
+              <div class="sms-mock">
+                <div class="sms-time">Today 2:14 PM</div>
+                <div class="sms-label">Client</div>
+                <div class="sms-bubble recv">Can we reschedule our Friday meeting?</div>
+                <div class="sms-label right">You</div>
+                <div class="sms-bubble sent">Of course. I am available Monday or Tuesday afternoon. Please let me know which works best for you.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-clock"></i> More Rules for Instant Messaging</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin:14px 0">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">4</div>
+              <div><strong style="color:var(--text)">Respect the Clock</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Avoid texting colleagues or clients before 8:00 AM or after 6:00 PM unless it is a genuine emergency. Just because they <em>can</em> reply does not mean they want a work notification at dinner.</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">5</div>
+              <div><strong style="color:var(--text)">Get Straight to the Point</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">Do not just text "Hi." and wait. State your purpose in the very first message: <em>"Hi Sarah, quick question — do you have the link to the client folder handy?"</em></span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">6</div>
+              <div><strong style="color:var(--text)">Keep Emojis &amp; Slang in Check</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">A 👍 or 🙂 is fine to show tone, but skip strings of fire emojis or internet slang (lol, brb, tbh) unless you have a very close, established rapport.</span></div>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:14px 18px;display:flex;gap:14px">
+              <div style="width:32px;height:32px;border-radius:50%;background:rgba(232,164,48,.15);color:var(--gold);display:grid;place-items:center;font-size:.85rem;font-weight:700;flex:none">7</div>
+              <div><strong style="color:var(--text)">Know When to Pivot</strong><br><span style="font-size:.93rem;color:var(--text);opacity:.88">If a thread goes back and forth more than three times without resolution, move it to a phone call or email. Texting is poor for nuanced problem-solving.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-exchange-alt"></i> When to Use Which Channel?</div>
+          <div style="overflow-x:auto;margin:14px 0">
+            <table style="width:100%;border-collapse:collapse;font-size:.95rem">
+              <thead>
+                <tr>
+                  <th style="background:var(--card-hi);color:var(--gold);font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;padding:12px 16px;text-align:left">Channel</th>
+                  <th style="background:var(--card-hi);color:var(--gold);font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;padding:12px 16px;text-align:left">Best Used For…</th>
+                  <th style="background:var(--card-hi);color:var(--gold);font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;padding:12px 16px;text-align:left">Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text);font-weight:700"><i class="fa fa-envelope" style="color:var(--gold);margin-right:7px"></i>Email</td>
+                  <td style="padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text);opacity:.88;line-height:1.6">Formal requests, detailed updates, sending documents, or anything requiring a paper trail.</td>
+                  <td style="padding:12px 16px;border-bottom:1px solid var(--border);color:var(--muted);font-style:italic;line-height:1.6">"Here is the contract for your review…"</td>
+                </tr>
+                <tr>
+                  <td style="padding:12px 16px;color:var(--text);font-weight:700"><i class="fa fa-comment-alt" style="color:var(--gold);margin-right:7px"></i>Text / IM</td>
+                  <td style="padding:12px 16px;color:var(--text);opacity:.88;line-height:1.6">Urgent updates, quick logistics, or casual check-ins.</td>
+                  <td style="padding:12px 16px;color:var(--muted);font-style:italic;line-height:1.6">"Running 5 mins late to the meeting!"</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="tip-box"><i class="fa fa-fire-alt"></i><p>If you are feeling angry or frustrated, never hit send on a text or email. Write it out in a blank document to vent, delete it, and rewrite once you have cooled down.</p></div>
+        </div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(0)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(1)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 3: Putting Clients on Hold ── -->
+      <div class="module-pane" id="mod-2">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 3 of 8</div>
+          <h1 class="mod-title">Putting Clients on Hold</h1>
+          <p class="mod-intro">You won't always have an immediate answer. How you handle that gap — between receiving a request and fulfilling it — defines your professionalism more than the answer itself.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-pause-circle"></i> The Three-Part Hold Formula</div>
+          <p class="body-text">Every hold communication must do three things. Miss any one, and the client is left with uncertainty — which always reads as incompetence.</p>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:14px 0">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center">
+              <div style="font-size:1.6rem;color:var(--gold);margin-bottom:8px"><i class="fa fa-check-circle"></i></div>
+              <div style="font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px">Acknowledge</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">"Thank you for your message regarding [specific topic]."</p>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center">
+              <div style="font-size:1.6rem;color:var(--gold);margin-bottom:8px"><i class="fa fa-info-circle"></i></div>
+              <div style="font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px">Explain</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">"I need to review your file / consult our specialist."</p>
+            </div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center">
+              <div style="font-size:1.6rem;color:var(--gold);margin-bottom:8px"><i class="fa fa-calendar-check"></i></div>
+              <div style="font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px">Commit</div>
+              <p style="font-size:.92rem;color:var(--text);opacity:.88">"I will respond with a full update by [specific day and time]."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-balance-scale"></i> What to Say vs. What Not to Say</div>
+          <div class="compare-grid">
+            <div class="compare-card dont-card">
+              <div class="compare-label"><i class="fa fa-times-circle"></i> Never Say This</div>
+              <div class="compare-text">"I'll get back to you when I can."<br><br>"I'm really busy right now."<br><br>"Someone will reach out soon."<br><br>"I don't know, let me check." (and then disappear)</div>
+            </div>
+            <div class="compare-card do-card">
+              <div class="compare-label"><i class="fa fa-check-circle"></i> Say This Instead</div>
+              <div class="compare-text">"I will respond by Thursday at 5 PM."<br><br>"I am currently reviewing your request."<br><br>"I will personally follow up with you by end of day."<br><br>"I need to confirm this detail — I'll have an answer for you by tomorrow morning."</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-comments"></i> Real-World Scenarios</div>
+          <p class="body-text">How you word your response in a tense moment can either defuse a situation or escalate it. Use these swaps to reframe your instinct into a professional reply.</p>
+          <div style="overflow-x:auto;margin:14px 0">
+            <table style="width:100%;border-collapse:collapse;font-size:.93rem">
+              <thead>
+                <tr>
+                  <th style="background:var(--card-hi);color:var(--gold);font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;padding:13px 16px;text-align:left;white-space:nowrap">Scenario</th>
+                  <th style="background:var(--card-hi);color:#f09090;font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;padding:13px 16px;text-align:left"><i class="fa fa-times-circle"></i>&nbsp; Don't Say This</th>
+                  <th style="background:var(--card-hi);color:#72d48a;font-size:.76rem;letter-spacing:1.2px;text-transform:uppercase;padding:13px 16px;text-align:left"><i class="fa fa-check-circle"></i>&nbsp; Say This Instead</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:13px 16px;border-bottom:1px solid var(--border);color:var(--text);font-weight:600;white-space:nowrap">You made a mistake</td>
+                  <td style="padding:13px 16px;border-bottom:1px solid var(--border);color:#e8baba;line-height:1.65;font-style:italic">"Sorry for the delay / my mistake."</td>
+                  <td style="padding:13px 16px;border-bottom:1px solid var(--border);color:#a8e6b4;line-height:1.65;font-style:italic">"Thank you for your patience while I sorted this out."</td>
+                </tr>
+                <tr>
+                  <td style="padding:13px 16px;border-bottom:1px solid var(--border);color:var(--text);font-weight:600;white-space:nowrap">Vague question</td>
+                  <td style="padding:13px 16px;border-bottom:1px solid var(--border);color:#e8baba;line-height:1.65;font-style:italic">"I don't understand what you mean."</td>
+                  <td style="padding:13px 16px;border-bottom:1px solid var(--border);color:#a8e6b4;line-height:1.65;font-style:italic">"To make sure we are fully aligned, could you clarify X?"</td>
+                </tr>
+                <tr>
+                  <td style="padding:13px 16px;color:var(--text);font-weight:600;white-space:nowrap">Client is upset</td>
+                  <td style="padding:13px 16px;color:#e8baba;line-height:1.65;font-style:italic">"You're wrong, we actually did send that."</td>
+                  <td style="padding:13px 16px;color:#a8e6b4;line-height:1.65;font-style:italic">"I completely understand your frustration. Let's hop on a 5-minute call to get this resolved immediately."</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(1)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(2)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 4: Clear Call to Action ── -->
+      <div class="module-pane" id="mod-3">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 4 of 8</div>
+          <h1 class="mod-title">Include a Clear Call to Action</h1>
+          <p class="mod-intro">A professional email without a clear next step leaves the recipient wondering what to do. Vague endings stall progress and frustrate clients. Every email should tell someone exactly what action to take.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-bullseye"></i> What Makes a CTA "Clear"?</div>
+          <p class="body-text">A strong Call to Action contains three elements: an <strong>action verb</strong>, a <strong>specific deadline</strong>, and a <strong>single ask</strong>. Multiple CTAs in one email create confusion; one focused ask gets results.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-exchange-alt"></i> Weak vs. Strong CTAs</div>
+          <div class="compare-grid">
+            <div class="compare-card dont-card">
+              <div class="compare-label"><i class="fa fa-times-circle"></i> Weak — Vague &amp; Passive</div>
+              <div class="compare-text">
+                "Let me know what you think."<br><br>
+                "Feel free to reach out if you have questions."<br><br>
+                "We can discuss this further."<br><br>
+                "Looking forward to hearing from you."
+              </div>
+            </div>
+            <div class="compare-card do-card">
+              <div class="compare-label"><i class="fa fa-check-circle"></i> Strong — Specific &amp; Actionable</div>
+              <div class="compare-text">
+                "Please confirm your approval by replying to this email by Friday, June 20."<br><br>
+                "Schedule your 30-minute review using the link below by Thursday."<br><br>
+                "Reply with the three documents listed above by EOD Wednesday."<br><br>
+                "Call me at (555) 123-4567 between 2–4 PM tomorrow to confirm."
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tip-box"><i class="fa fa-lightbulb"></i><p>Before you send any email, ask yourself: <em>"If the reader does nothing but the one thing I ask, will this move forward?"</em> If yes, your CTA is doing its job.</p></div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(2)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(3)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 5: Hold Message Templates ── -->
+      <div class="module-pane" id="mod-4">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 5 of 8</div>
+          <h1 class="mod-title">Hold Message Templates</h1>
+          <p class="mod-intro">Having ready-to-use templates removes the pressure of writing from scratch when you're pressed for time — and ensures your messaging stays consistent and professional every time.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-envelope"></i> Email Acknowledgment Template</div>
+          <div class="template-card">
+            <div class="template-label">Template 1 · Email Hold / Acknowledgment</div>
+            <div class="template-body">Subject: Re: [Original Subject] — Received
+
+Dear [First Name / Mr. / Ms. Last Name],
+
+Thank you for your email regarding [specific topic]. I have received your message and am currently reviewing the details.
+
+I will provide a complete response by [Day, Date] at [Time, Timezone].
+
+If this matter is time-sensitive, please contact me directly at [phone number].
+
+Best regards,
+[Your Full Name]
+[Your Title]
+[Company Name]
+[Phone Number]</div>
+            <button class="copy-btn" onclick="copyTemplate(this)"><i class="fa fa-copy"></i> Copy</button>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-phone"></i> Phone Hold Message Template</div>
+          <div class="template-card">
+            <div class="template-label">Template 2 · Phone / Voicemail On-Hold</div>
+            <div class="template-body">Thank you for calling [Company Name]. All of our team members
+are currently assisting other clients.
+
+Your call is very important to us. Please stay on the line and
+a team member will be with you shortly — or press [#] to
+leave a voicemail and we will return your call within
+[X business hours].
+
+We appreciate your patience and look forward to speaking with you.</div>
+            <button class="copy-btn" onclick="copyTemplate(this)"><i class="fa fa-copy"></i> Copy</button>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-sms"></i> SMS Hold Template</div>
+          <div class="template-card">
+            <div class="template-label">Template 3 · Text Message Hold</div>
+            <div class="template-body">Hi [First Name], I received your message and am currently
+with a client. I will follow up with you by [time/date].
+Thank you for your patience. — [Your Name], [Company]</div>
+            <button class="copy-btn" onclick="copyTemplate(this)"><i class="fa fa-copy"></i> Copy</button>
+          </div>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-plane"></i> Out-of-Office Template</div>
+          <div class="template-card">
+            <div class="template-label">Template 4 · Out-of-Office Auto-Reply</div>
+            <div class="template-body">Subject: Out of Office: [Your Name] — Returns [Date]
+
+Thank you for your email. I am currently out of the office
+from [Start Date] through [End Date] with limited access
+to email.
+
+For immediate assistance, please contact:
+[Colleague Name] | [Email] | [Phone]
+
+I will respond to your message upon my return on [Date].
+
+Best regards,
+[Your Name]
+[Title] · [Company]</div>
+            <button class="copy-btn" onclick="copyTemplate(this)"><i class="fa fa-copy"></i> Copy</button>
+          </div>
+        </div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(3)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(4)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 6: Common Mistakes ── -->
+      <div class="module-pane" id="mod-5">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 6 of 8</div>
+          <h1 class="mod-title">Common Mistakes &amp; Bad Behaviors</h1>
+          <p class="mod-intro">Even experienced professionals fall into these traps. Recognizing them is the first step to eliminating them.</p>
+        </div>
+
+        <div class="mistake-item">
+          <div class="mistake-num">1</div>
+          <div class="mistake-info">
+            <h4>Sending Emotional Replies</h4>
+            <p>Writing back when you're frustrated or angry guarantees regret. <strong>Draft it, save it, sleep on it.</strong> Send only when you can read it as if you were the recipient.</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">2</div>
+          <div class="mistake-info">
+            <h4>Reply All Abuse</h4>
+            <p>Only hit Reply All when every person on the thread genuinely needs your response. Unnecessary Reply All emails frustrate teams and bury important messages.</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">3</div>
+          <div class="mistake-info">
+            <h4>Vague or Missing Subject Lines</h4>
+            <p>A blank subject or "Hey" tells the recipient nothing. Use a specific, descriptive subject like "Meeting Follow-up: Tax Filing Deadline — Action Required."</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">4</div>
+          <div class="mistake-info">
+            <h4>Ignoring Questions in the Email</h4>
+            <p>If a client asked three questions, answer all three. Addressing only one forces a follow-up email — which wastes everyone's time and signals carelessness.</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">5</div>
+          <div class="mistake-info">
+            <h4>Over-CC'ing</h4>
+            <p>CC only the people who genuinely need to know. Copying your entire team on every client email creates noise, confusion, and dilutes accountability.</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">6</div>
+          <div class="mistake-info">
+            <h4>Sending Without Proofreading</h4>
+            <p>Typos and grammatical errors signal a lack of care. Read every email aloud before sending. Better yet, read it backwards — it forces you to see individual words.</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">7</div>
+          <div class="mistake-info">
+            <h4>Using Undefined Timelines</h4>
+            <p>"Soon," "shortly," and "when I get a chance" mean nothing to a client waiting for answers. Always give a specific date and time.</p>
+          </div>
+        </div>
+        <div class="mistake-item">
+          <div class="mistake-num">8</div>
+          <div class="mistake-info">
+            <h4>Not Following Up</h4>
+            <p>If you promised to respond by Thursday and Thursday came and went — that is a broken commitment. Set a reminder. Follow up proactively before the client has to chase you.</p>
+          </div>
+        </div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(4)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(5)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 7: Avoid Informal Language ── -->
+      <div class="module-pane" id="mod-6">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 7 of 8</div>
+          <h1 class="mod-title">Avoid Informal Language</h1>
+          <p class="mod-intro">The words you choose either build or undermine your professional credibility. Informal language in client communications signals a lack of seriousness — even when your work is excellent.</p>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-exchange-alt"></i> Professional Word Swap Guide</div>
+          <p class="body-text">These are the most common informal phrases used in professional communication — and their professional alternatives. Bookmark this table.</p>
+          <table class="swap-table">
+            <thead>
+              <tr><th>❌ Informal — Don't Use</th><th>✓ Professional — Use This</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="col-bad">Hey / Yo / Sup</td><td class="col-good">Dear [Name] / Good morning / Hello</td></tr>
+              <tr><td class="col-bad">ASAP / right away</td><td class="col-good">By [specific date and time]</td></tr>
+              <tr><td class="col-bad">Can't / won't</td><td class="col-good">Am unable to / will not be able to</td></tr>
+              <tr><td class="col-bad">Gonna / wanna</td><td class="col-good">Going to / would like to</td></tr>
+              <tr><td class="col-bad">FYI</td><td class="col-good">For your reference / Please note</td></tr>
+              <tr><td class="col-bad">Thx / Ty</td><td class="col-good">Thank you / I appreciate your time</td></tr>
+              <tr><td class="col-bad">LOL / OMG / lol</td><td class="col-good">[Remove entirely]</td></tr>
+              <tr><td class="col-bad">My bad</td><td class="col-good">I apologize for the oversight</td></tr>
+              <tr><td class="col-bad">No worries</td><td class="col-good">I understand / Happy to assist</td></tr>
+              <tr><td class="col-bad">Touched base</td><td class="col-good">Followed up / Connected with</td></tr>
+              <tr><td class="col-bad">Just circling back</td><td class="col-good">I am following up on [specific topic]</td></tr>
+              <tr><td class="col-bad">Per my last email</td><td class="col-good">As mentioned in my previous message</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="lesson-block">
+          <div class="block-heading"><i class="fa fa-question-circle"></i> The Tone Check</div>
+          <p class="body-text">Before sending, ask yourself these three questions:</p>
+          <div style="display:flex;flex-direction:column;gap:8px;margin:12px 0">
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.9rem"><i class="fa fa-check" style="color:var(--gold);flex:none"></i> Would I be comfortable if my manager read this email?</div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.9rem"><i class="fa fa-check" style="color:var(--gold);flex:none"></i> Does this message reflect the level of professionalism I want associated with my name?</div>
+            <div style="background:var(--card);border:1px solid var(--border);border-radius:8px;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:.9rem"><i class="fa fa-check" style="color:var(--gold);flex:none"></i> If this email were shown in court or a review, would I stand behind every word?</div>
+          </div>
+        </div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(5)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(6)"><i class="fa fa-check"></i> Mark Complete &amp; Continue</button>
+        </div>
+      </div>
+
+      <!-- ── MODULE 8: Key Takeaways ── -->
+      <div class="module-pane" id="mod-7">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Module 8 of 8</div>
+          <h1 class="mod-title">Key Takeaways</h1>
+          <p class="mod-intro">You've covered the full spectrum of professional communication. Here's your quick-reference summary — the eight principles to carry into every interaction.</p>
+        </div>
+
+        <div class="takeaway-grid">
+          <div class="takeaway-card">
+            <div class="tk-num">01</div>
+            <h4>Respond Within 24 Hours</h4>
+            <p>Acknowledge every client email within one business day — even if only to confirm receipt and set a timeline.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">02</div>
+            <h4>Use the Hold Formula</h4>
+            <p>When you need time: Acknowledge → Explain → Commit. Always give a specific date and time.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">03</div>
+            <h4>Every Email Needs a CTA</h4>
+            <p>End every email with one specific, actionable request. Tell your reader exactly what to do and by when.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">04</div>
+            <h4>Texts Require Full Sentences</h4>
+            <p>Professional texting means complete thoughts. No "k," no "👍," no abbreviations with clients.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">05</div>
+            <h4>Keep Templates Ready</h4>
+            <p>Save your hold, acknowledgment, and OOO templates. Consistency under pressure requires preparation.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">06</div>
+            <h4>Proofread Every Send</h4>
+            <p>Read it aloud. Typos and unclear sentences undermine the credibility of even excellent work.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">07</div>
+            <h4>Swap Informal for Professional</h4>
+            <p>Replace "ASAP," "gonna," "thx," and "my bad" with their professional equivalents every time.</p>
+          </div>
+          <div class="takeaway-card">
+            <div class="tk-num">08</div>
+            <h4>Never Send Emotional Replies</h4>
+            <p>Draft it, save it, review it tomorrow. Emotional emails damage relationships that take years to build.</p>
+          </div>
+        </div>
+
+        <div class="tip-box" style="margin-top:24px"><i class="fa fa-trophy" style="color:var(--gold)"></i><p><strong>You're ready for the quiz!</strong> The final assessment tests your understanding of all eight modules. You need 90% (9 out of 10) to pass and earn your certificate. You may retake the quiz as many times as needed.</p></div>
+
+        <div class="mod-footer">
+          <button class="btn-back" onclick="goModule(6)"><i class="fa fa-arrow-left"></i> Back</button>
+          <button class="btn-complete" onclick="completeModule(7); setTimeout(goQuiz,300)"><i class="fa fa-clipboard-check"></i> Complete &amp; Take the Quiz</button>
+        </div>
+      </div>
+
+      <!-- ── QUIZ ── -->
+      <div id="quizPane">
+        <div class="mod-header">
+          <div class="mod-eyebrow">Final Assessment</div>
+          <h1 class="mod-title">Knowledge Check</h1>
+          <p class="mod-intro">Answer all 10 questions. You need at least 9 correct (90%) to pass and earn your certificate.</p>
+        </div>
+
+        <div id="quizQuestions"></div>
+
+        <div class="quiz-submit-wrap" id="quizActions">
+          <button class="btn-submit" id="submitBtn" onclick="submitQuiz()">Submit Answers</button>
+          <span style="font-size:.82rem;color:var(--muted)" id="answerCount">0 of 10 answered</span>
+        </div>
+
+        <div id="quizResultBox" style="display:none"></div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CERTIFICATE SCREEN
+══════════════════════════════════════════ -->
+<div id="certScreen">
+  <div>
+    <div class="cert-wrap">
+      <div class="cert-corner tl"></div>
+      <div class="cert-corner tr"></div>
+      <div class="cert-corner bl"></div>
+      <div class="cert-corner br"></div>
+      <div class="cert-content">
+        <div class="cert-logo-wrap">
+          <img src="images/Max-about-us-2.jpg" alt="Max Drew, CPA">
+        </div>
+        <div class="cert-presents">This is to certify that</div>
+        <div class="cert-name" id="certName">—</div>
+        <div class="cert-has-completed">has successfully completed the course</div>
+        <div class="cert-of-completion">Certificate of Completion</div>
+        <div class="cert-course">Professional Communication Skills</div>
+        <div class="cert-divider"></div>
+        <div class="cert-meta">
+          <div class="cert-meta-item"><div class="val" id="certDate">—</div><div class="lbl">Date Completed</div></div>
+          <div class="cert-meta-item"><div class="val">8 Modules</div><div class="lbl">Completed</div></div>
+          <div class="cert-meta-item"><div class="val">100%</div><div class="lbl">Score on Quiz</div></div>
+        </div>
+        <div class="cert-sig">
+          <div class="cert-sig-item">
+            <div class="cert-sig-line" style="width:140px;height:1px;background:#dadce0;margin:0 auto 5px"></div>
+            <div class="cert-sig-name">Max Drew, CPA</div>
+            <div class="cert-sig-role">Instructor · Magnum CPA Academy</div>
+          </div>
+        </div>
+        <div class="cert-trust-badges">
+          <img src="images/BBB.jpg" alt="BBB Accredited Business">
+          <img src="images/Google_2.png" alt="Google Reviews">
+          <img src="images/Ramsey.jpg" alt="Ramsey Trusted">
+        </div>
+      </div>
+    </div>
+    <div class="cert-actions">
+      <button class="btn-print" onclick="window.print()"><i class="fa fa-print"></i> Print Certificate</button>
+      <button class="btn-back-course" onclick="location.href='index.html'"><i class="fa fa-home"></i> Back to Academy</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════ -->
+<script>
+/* ── State ── */
+const state = {
+  reg: null,
+  currentModule: 0,
+  completed: new Set(),
+  inQuiz: false,
+  quizAnswers: {},
+  quizSubmitted: false,
+};
+
+/* ── Quiz Data ── */
+const QUIZ = [
+  {
+    q: "What is the recommended response time for professional emails?",
+    opts: ["Within 1 hour, regardless of complexity", "Within 24–48 business hours", "Within one week", "Whenever you have time"],
+    ans: 1,
+    explain: "The professional standard is to acknowledge all client emails within 24–48 business hours — even if just to confirm receipt and set a timeline for a full response."
+  },
+  {
+    q: "Which of the following is the most appropriate email greeting?",
+    opts: ["Hey!", "Dear Mr./Ms. Johnson,", "To Whom It May Concern,", "Greetings,"],
+    ans: 1,
+    explain: "Using the recipient's name shows respect and professionalism. 'Dear Mr./Ms. [Last Name],' is ideal for formal client communication."
+  },
+  {
+    q: "When putting a client on hold via email, the correct sequence is:",
+    opts: ["Explain → Acknowledge → Commit", "Commit → Explain → Acknowledge", "Acknowledge → Explain → Commit", "Explain → Commit → Acknowledge"],
+    ans: 2,
+    explain: "The three-part hold formula is Acknowledge (confirm you received their message) → Explain (brief reason) → Commit (specific date/time you will respond)."
+  },
+  {
+    q: "A strong Call to Action (CTA) in an email should be:",
+    opts: ["Vague, to allow flexibility in the response", "Multiple asks to cover all possibilities", "Specific, with an action verb and a deadline", "Placed in the subject line only"],
+    ans: 2,
+    explain: "A strong CTA is specific, starts with an action verb, includes a deadline, and asks for only one thing. Multiple CTAs in one email create confusion."
+  },
+  {
+    q: "Which of the following is an informal phrase that should be avoided in professional communication?",
+    opts: ["Please find the attached document.", "I look forward to hearing from you.", "ASAP — gonna need this done.", "I am following up on our previous conversation."],
+    ans: 2,
+    explain: "\"ASAP\" and \"gonna\" are informal. Always replace with a specific date/time and formal language (\"going to\")."
+  },
+  {
+    q: "Before sending any professional email, you should always:",
+    opts: ["Add multiple recipients in CC for transparency", "Proofread it by reading it aloud", "Use bold and colored text for emphasis", "Wait at least 30 minutes"],
+    ans: 1,
+    explain: "Reading your email aloud catches awkward phrasing, typos, and tone issues before they reach the client. Always proofread before sending."
+  },
+  {
+    q: "Which text message reply is most professional?",
+    opts: ["k", "👍", "sure, sounds good lol", "Understood. I will follow up with you by 3 PM today."],
+    ans: 3,
+    explain: "Professional text replies are complete sentences with proper grammar, a specific commitment, and no slang, abbreviations, or emojis."
+  },
+  {
+    q: "\"Reply All\" should be used:",
+    opts: ["Every time you reply to a group email", "Only when all recipients need your response", "To keep everyone in the loop at all times", "For urgent emails only"],
+    ans: 1,
+    explain: "Reply All should only be used when every person on the thread genuinely needs to see your response. Overusing it creates inbox noise and frustration."
+  },
+  {
+    q: "Every professional email must include:",
+    opts: ["Multiple fonts for visual hierarchy", "A specific subject line, greeting, body, closing, and signature", "At least three paragraphs", "An emoji to maintain a friendly tone"],
+    ans: 1,
+    explain: "The five essential parts of a professional email are: Subject Line, Greeting, Body, Professional Closing, and Signature."
+  },
+  {
+    q: "You receive an urgent client email but need 48 hours to get the full answer. You should:",
+    opts: ["Wait until you have the full answer before replying", "Forward it to a colleague without responding", "Send an immediate acknowledgment with the specific timeframe", "Call them instead without sending an email"],
+    ans: 2,
+    explain: "Silence is never the right answer. Send a quick acknowledgment using the hold formula: Acknowledge the message, briefly explain why you need time, and commit to a specific deadline."
+  }
+];
+
+/* ── Registration ── */
+function submitRegistration() {
+  const name = document.getElementById('regName').value.trim();
+
+  document.querySelectorAll('.gerror').forEach(el => el.classList.remove('show'));
+
+  if (!name) { document.getElementById('errName').classList.add('show'); return; }
+
+  state.reg = { name };
+  localStorage.setItem('comm_course_reg', JSON.stringify(state.reg));
+
+  document.getElementById('topbarName').textContent = name;
+  document.getElementById('regScreen').style.display = 'none';
+  document.getElementById('courseScreen').style.display = 'flex';
+  document.getElementById('courseScreen').style.flexDirection = 'column';
+  buildQuiz();
+}
+
+/* ── Module Navigation ── */
+function goModule(idx) {
+  state.inQuiz = false;
+  state.currentModule = idx;
+  document.querySelectorAll('.module-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('mod-' + idx).classList.add('active');
+  document.getElementById('quizPane').classList.remove('active');
+  updateSidebar();
+  scrollToTop();
+}
+
+function goQuiz() {
+  state.inQuiz = true;
+  document.querySelectorAll('.module-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('quizPane').classList.add('active');
+  updateSidebar();
+  scrollToTop();
+}
+
+function scrollToTop() {
+  document.querySelector('.course-main').scrollTop = 0;
+}
+
+/* ── Complete Module ── */
+function completeModule(idx) {
+  state.completed.add(idx);
+  updateSidebar();
+  if (idx < 7) goModule(idx + 1);
+}
+
+/* ── Sidebar Update ── */
+function updateSidebar() {
+  for (let i = 0; i < 8; i++) {
+    const btn = document.getElementById('sb-' + i);
+    btn.classList.remove('active','done');
+    if (state.completed.has(i)) btn.classList.add('done');
+    if (!state.inQuiz && state.currentModule === i) btn.classList.add('active');
+  }
+  const quizBtn = document.getElementById('sb-quiz');
+  quizBtn.classList.toggle('active', state.inQuiz);
+
+  // Progress ring
+  const done = state.completed.size;
+  document.getElementById('progressLabel').textContent = done + ' / 8';
+  const circumference = 138.2;
+  const offset = circumference - (done / 8) * circumference;
+  document.getElementById('progressRingFill').style.strokeDashoffset = offset;
+}
+
+/* ── Copy Template ── */
+function copyTemplate(btn) {
+  const text = btn.closest('.template-card').querySelector('.template-body').textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    btn.innerHTML = '<i class="fa fa-check"></i> Copied!';
+    btn.style.borderColor = 'var(--green)';
+    btn.style.color = '#72d48a';
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa fa-copy"></i> Copy';
+      btn.style.borderColor = '';
+      btn.style.color = '';
+    }, 2000);
+  });
+}
+
+/* ── Build Quiz ── */
+function buildQuiz() {
+  const container = document.getElementById('quizQuestions');
+  container.innerHTML = QUIZ.map((q, qi) => `
+    <div class="quiz-q" id="qq-${qi}">
+      <div class="quiz-q-num">Question ${qi+1} of ${QUIZ.length}</div>
+      <div class="quiz-q-text">${q.q}</div>
+      <div class="quiz-opts">
+        ${q.opts.map((opt, oi) => `
+          <button class="quiz-opt" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})" ${state.quizSubmitted?'disabled':''}>
+            <div class="opt-letter">${'ABCD'[oi]}</div>
+            <span>${opt}</span>
+          </button>`).join('')}
+      </div>
+      <div class="quiz-feedback" id="fb-${qi}"></div>
+    </div>`).join('');
+}
+
+function selectOpt(qi, oi) {
+  if (state.quizSubmitted) return;
+  state.quizAnswers[qi] = oi;
+  // Visual selection
+  for (let x = 0; x < QUIZ[qi].opts.length; x++) {
+    const btn = document.getElementById('opt-' + qi + '-' + x);
+    btn.classList.toggle('selected', x === oi);
+  }
+  updateAnswerCount();
+}
+
+function updateAnswerCount() {
+  const cnt = Object.keys(state.quizAnswers).length;
+  document.getElementById('answerCount').textContent = cnt + ' of 10 answered';
+  document.getElementById('submitBtn').disabled = cnt < QUIZ.length;
+}
+
+function submitQuiz() {
+  if (Object.keys(state.quizAnswers).length < QUIZ.length) return;
+  state.quizSubmitted = true;
+
+  let score = 0;
+  QUIZ.forEach((q, qi) => {
+    const chosen = state.quizAnswers[qi];
+    const correct = q.ans;
+    const isRight = chosen === correct;
+    if (isRight) score++;
+
+    // Disable all options
+    q.opts.forEach((_, oi) => {
+      const btn = document.getElementById('opt-' + qi + '-' + oi);
+      btn.disabled = true;
+      btn.classList.remove('selected');
+      if (oi === correct) btn.classList.add(isRight && oi === chosen ? 'correct' : 'missed');
+      if (oi === chosen && !isRight) btn.classList.add('wrong');
+    });
+
+    const fb = document.getElementById('fb-' + qi);
+    fb.textContent = (isRight ? '✓ Correct. ' : '✗ Incorrect. ') + q.explain;
+    fb.className = 'quiz-feedback show ' + (isRight ? 'pass-fb' : 'fail-fb');
+  });
+
+  const passed = score >= 9;
+  const pct = Math.round((score / QUIZ.length) * 100);
+
+  // Hide submit row, show results
+  document.getElementById('quizActions').style.display = 'none';
+  const resultBox = document.getElementById('quizResultBox');
+  resultBox.style.display = 'block';
+
+  resultBox.innerHTML = `
+    <div style="background:var(--card);border:1px solid ${passed?'rgba(58,154,74,.35)':'rgba(201,67,67,.35)'};border-radius:var(--r);padding:30px;text-align:center;margin-top:24px">
+      <div style="font-size:3rem;margin-bottom:12px">${passed ? '🎉' : '📖'}</div>
+      <h2 style="font-family:Georgia,serif;font-size:1.6rem;color:var(--text);margin-bottom:8px">
+        ${passed ? 'Congratulations — You Passed!' : 'Keep Reviewing — Not Quite Yet'}
+      </h2>
+      <div style="font-size:3rem;font-weight:800;color:${passed?'var(--green)':'var(--red)'};margin:12px 0;font-variant-numeric:tabular-nums">
+        ${score} <span style="font-size:1.5rem;font-weight:400;color:var(--muted)">/ 10</span>
+      </div>
+      <div style="font-size:.92rem;color:var(--muted);margin-bottom:24px">
+        ${pct}% — ${passed ? 'You met the 90% passing threshold.' : 'You need 9/10 (90%) to pass. Review the modules and try again.'}
+      </div>
+      ${passed
+        ? `<button class="btn-cert" onclick="showCertificate()"><i class="fa fa-certificate"></i> View My Certificate</button>`
+        : `<button class="btn-retake" onclick="retakeQuiz()"><i class="fa fa-redo"></i> Retake Quiz</button>
+           <p style="font-size:.8rem;color:var(--muted);margin-top:14px">Review the modules above before retaking. Scroll up to see which answers were incorrect.</p>`
+      }
+    </div>`;
+}
+
+function retakeQuiz() {
+  state.quizAnswers = {};
+  state.quizSubmitted = false;
+  buildQuiz();
+  document.getElementById('quizActions').style.display = 'flex';
+  document.getElementById('answerCount').textContent = '0 of 10 answered';
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('quizResultBox').style.display = 'none';
+  scrollToTop();
+}
+
+function showCertificate() {
+  const reg = state.reg || JSON.parse(localStorage.getItem('comm_course_reg') || '{}');
+  document.getElementById('certName').textContent = reg.name || 'Participant';
+  const today = new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('certDate').textContent = today;
+  document.getElementById('courseScreen').style.display = 'none';
+  document.getElementById('certScreen').style.display = 'flex';
+}
+
+/* ── Init ── */
+(function init() {
+  // Pre-fill date
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('regDate').value = today;
+
+  // Check for returning user
+  const saved = localStorage.getItem('comm_course_reg');
+  if (saved) {
+    state.reg = JSON.parse(saved);
+    document.getElementById('regName').value  = state.reg.name || '';
+    document.getElementById('regEmail').value = state.reg.email || '';
+  }
+
+  updateAnswerCount();
+})();
+
+/* ══════════════════════════════════════════
+   INTERACTIVE ENHANCEMENTS
+══════════════════════════════════════════ */
+
+/* ── 3D Tilt on cards ── */
+function bindAllTilts() {
+  const sel = [
+    '.takeaway-card',
+    '.compare-card',
+    '.quiz-q',
+    '.template-card',
+    '.reg-card',
+  ].join(',');
+
+  document.querySelectorAll(sel).forEach(el => {
+    if (el._tilt) return;
+    el._tilt = true;
+    el.classList.add('tilt-el');
+    el.style.willChange = 'transform';
+
+    const isForm = el.classList.contains('reg-card');
+    const maxDeg = isForm ? 4 : 9;
+
+    el.addEventListener('mousemove', e => {
+      const r  = el.getBoundingClientRect();
+      const x  = e.clientX - r.left;
+      const y  = e.clientY - r.top;
+      const cx = r.width  / 2;
+      const cy = r.height / 2;
+      const rotY =  ((x - cx) / cx) * maxDeg;
+      const rotX = -((y - cy) / cy) * maxDeg;
+      el.style.transform = `perspective(800px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateZ(8px)`;
+      el.style.setProperty('--tx', (x / r.width  * 100) + '%');
+      el.style.setProperty('--ty', (y / r.height * 100) + '%');
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.transition = 'transform 0.35s cubic-bezier(0.34,1,0.64,1)';
+      el.style.transform  = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)';
+      setTimeout(() => { el.style.transition = ''; }, 360);
+    });
+  });
+}
+
+/* ── Wrap goModule to re-bind tilts after navigation ── */
+const _origGoModule = goModule;
+goModule = function(idx) {
+  _origGoModule(idx);
+  setTimeout(bindAllTilts, 80);
+};
+
+/* ── Wrap buildQuiz to bind tilts after quiz renders ── */
+const _origBuildQuiz = buildQuiz;
+buildQuiz = function() {
+  _origBuildQuiz();
+  setTimeout(bindAllTilts, 80);
+};
+
+/* ── Wrap submitRegistration to bind tilts when course loads ── */
+const _origSubmitRegistration = submitRegistration;
+submitRegistration = function() {
+  _origSubmitRegistration();
+  setTimeout(bindAllTilts, 120);
+};
+
+/* ── Module-number bounce on complete ── */
+const _origCompleteModule = completeModule;
+completeModule = function(idx) {
+  _origCompleteModule(idx);
+  const sbBtn = document.getElementById('sb-' + idx);
+  if (sbBtn) {
+    const numEl = sbBtn.querySelector('.mod-num');
+    if (numEl) {
+      numEl.classList.remove('bounce');
+      void numEl.offsetWidth;  // force reflow to restart animation
+      numEl.classList.add('bounce');
+    }
+  }
+};
+
+/* ── Canvas confetti burst ── */
+function confettiBurst() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;inset:0;width:100vw;height:100vh;pointer-events:none;z-index:9999';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  canvas.width  = innerWidth;
+  canvas.height = innerHeight;
+
+  const COLORS = ['#E8A430','#F3C06A','#3A9A4A','#72D48A','#4FC3F7','#ffffff','#FFF176','#FF8A65'];
+  const pieces = Array.from({ length: 150 }, () => ({
+    x:  Math.random() * canvas.width,
+    y: -20 - Math.random() * 120,
+    w:  Math.random() * 11 + 5,
+    h:  Math.random() * 5  + 3,
+    color:   COLORS[Math.floor(Math.random() * COLORS.length)],
+    vx:      (Math.random() - 0.5) * 6,
+    vy:       Math.random() * 3 + 2,
+    angle:    Math.random() * Math.PI * 2,
+    spin:    (Math.random() - 0.5) * 0.19,
+    gravity:  Math.random() * 0.07 + 0.025,
+  }));
+
+  let alpha = 1, raf;
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.globalAlpha = alpha;
+    pieces.forEach(p => {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+      p.x     += p.vx;
+      p.y     += p.vy;
+      p.vy    += p.gravity;
+      p.angle += p.spin;
+      p.vx    += (Math.random() - 0.5) * 0.06;
+    });
+    alpha -= 0.0045;
+    if (alpha > 0) { raf = requestAnimationFrame(draw); }
+    else { cancelAnimationFrame(raf); canvas.remove(); }
+  }
+  draw();
+}
+
+/* ── Patch submitQuiz to fire confetti on pass ── */
+const _origSubmitQuiz = submitQuiz;
+submitQuiz = function() {
+  _origSubmitQuiz();
+  let score = 0;
+  QUIZ.forEach((q, qi) => { if (state.quizAnswers[qi] === q.ans) score++; });
+  if (score >= 9) setTimeout(confettiBurst, 420);
+};
+
+/* ── Button ripple effect ── */
+function addRipple(e) {
+  const btn = e.currentTarget;
+  const r   = btn.getBoundingClientRect();
+  const sz  = Math.max(r.width, r.height);
+  const rpl = document.createElement('span');
+  rpl.style.cssText = [
+    'position:absolute',
+    `width:${sz}px`,
+    `height:${sz}px`,
+    'border-radius:50%',
+    'background:rgba(255,255,255,0.28)',
+    `left:${e.clientX - r.left - sz / 2}px`,
+    `top:${e.clientY - r.top  - sz / 2}px`,
+    'transform:scale(0)',
+    'animation:rippleOut 0.55s ease forwards',
+    'pointer-events:none',
+  ].join(';');
+  if (getComputedStyle(btn).position === 'static') btn.style.position = 'relative';
+  btn.style.overflow = 'hidden';
+  btn.appendChild(rpl);
+  rpl.addEventListener('animationend', () => rpl.remove());
+}
+
+function bindRipples() {
+  document.querySelectorAll('.btn-complete, .btn-submit, .btn-cert, .gsubmit').forEach(btn => {
+    if (btn._ripple) return;
+    btn._ripple = true;
+    btn.addEventListener('click', addRipple);
+  });
+}
+
+/* ── Initial bind ── */
+(function initInteractive() {
+  bindAllTilts();
+  bindRipples();
+})();
+</script>
+</body>
+</html>
